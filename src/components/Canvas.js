@@ -1,8 +1,19 @@
-import  React, { useState, useEffect} from 'react';
+import  React, { useState,useEffect} from 'react';
 import LeaderLine from "leader-line-new";
-
+import { Link } from 'react-router-dom';
 
 function Canvas(){
+
+  // useEffect(() => {
+  //   window.addEventListener('beforeunload', alertUser)
+  //   return () => {
+  //     window.removeEventListener('beforeunload', alertUser)
+  //   }
+  // }, [])
+  // const alertUser = e => {
+  //   e.preventDefault()
+  //   e.returnValue = ''
+  // }
 
   const [nodes,Setnodes]=useState(1)
   const [arr,setarr]=useState([])
@@ -29,7 +40,8 @@ function Canvas(){
     }
     var line=new LeaderLine(
       document.getElementById(`${arr[a-1]}`),
-      document.getElementById(`${arr[b-1]}`)
+      document.getElementById(`${arr[b-1]}`),
+      {middleLabel: LeaderLine.pathLabel(`${c}`),}
     );
     line.path="straight";
 
@@ -44,18 +56,22 @@ function Canvas(){
     }
     var line=new LeaderLine(
       document.getElementById(`${arr[a-1]}`),
-      document.getElementById(`${arr[b-1]}`)
+      document.getElementById(`${arr[b-1]}`),
+      {middleLabel: LeaderLine.pathLabel(`${c}`)}
     );
     line.path="straight";
     var line2=new LeaderLine(
       document.getElementById(`${arr[b-1]}`),
-      document.getElementById(`${arr[a-1]}`)
+      document.getElementById(`${arr[a-1]}`),
     );
     line2.path="straight";
     event.preventDefault();
   }
 
   const setStart=(event)=>{
+    for(let i=1;i<nodes;i++){
+    document.getElementById(`${arr[i-1]}`).style.backgroundColor="green"
+    }
     document.getElementById(`${arr[d-1]}`).style.backgroundColor="red"
     event.preventDefault();
   }
@@ -102,12 +118,13 @@ function Canvas(){
                           handleClick()
                           document.getElementById(`${i*100+j}`).style.backgroundColor="green";
                           document.getElementById(`${i*100+j}`).style.borderRadius="50%";
-                          document.getElementById(`${i*100+j}`).innerText=nodes;
-                          document.getElementById(`${i*100+j}`).style.alignItems="";
+                          document.getElementById(`${i*100+j}`).innerHTML=`${nodes}`;
+                          document.getElementById(`${i*100+j}`).style.alignItems="center";
+                          document.getElementById(`${i*100+j}`).style.justifyContent="center";
+                          
                           setarr([...arr,i*100+j])
-                          // document.getElementById(`${i*100+j}`).style.
                           }}>
-                            <div style={{padding:"10px"}}>{}</div>
+                            <div style={{padding:"10px"}}></div>
                         </div>;
                     })}
                     </div>
