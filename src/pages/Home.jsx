@@ -11,6 +11,7 @@ const Home = () => {
         <Link to="/sort">Sorting Algos</Link>
         <br></br>
         <button onClick={() => openInNewTab('/graph')}>graph Algos</button>
+        <img src="https://miro.medium.com/v2/resize:fit:566/1*15KkonMRnHdbzGhFw0PXCA.gif" alt="graphs"></img>
         {/* <Link to="/graph">Graph Algos</Link> */}
         <br></br>
         <Link to="/graph">Binary Serch Algorithm</Link>
