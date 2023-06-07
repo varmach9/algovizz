@@ -1,10 +1,10 @@
 import  React, { useState,useEffect} from 'react';
 import LeaderLine from "leader-line-new";
-import { Link } from 'react-router-dom';
 
 function Canvas(){
   const [nodes,Setnodes]=useState(1)
   const [arr,setarr]=useState([])
+  const [running,setrunning]=useState(0)
   const [adjlist,setadjlist]=useState([[]])
   const [adjMat,setadjMat]=useState([[0]])
   useEffect(() => {
@@ -21,6 +21,8 @@ function Canvas(){
 
 // bfs
 const bfs=async()=>{
+  if(running){return}
+  setrunning(1)
   if (nodes===0||nodes===1){
     alert("not enough nodes to execute algorithm");
     return;
@@ -53,9 +55,12 @@ const bfs=async()=>{
     }
   
     console.log(result);
+setrunning(0)
   }
 // dfs
 const dfs=async()=>{
+  if(running){return}
+  setrunning(1)
   if (nodes===0||nodes===1){
     alert("not enough nodes to execute algorithm");
     return;
@@ -87,9 +92,13 @@ const dfs=async()=>{
     }
   }
   console.log(result);
+setrunning(0)
+
 } 
 // djkstras
 const djk=async(graph=adjlist, src=d)=> {
+  if(running){return}
+  setrunning(1)
   if (nodes===0||nodes===1){
     alert("not enough nodes to execute algorithm");
     return;
@@ -141,11 +150,24 @@ while(1){
     break
   }
 }
-
+setrunning(0)
 
 }
 // bip
 const bip=async()=>{
+  if(running){return}
+  setrunning(1)
+  if (nodes===0||nodes===1){
+    alert("not enough nodes to execute algorithm");
+    return;
+  }
+  if (d>=nodes){
+    alert("wrong starting node");
+    return;
+  }
+  for(let i=0;i<nodes-1;i++){
+    document.getElementById(`${arr[i]}`).style.backgroundColor="green";
+  }
   document.getElementById(`resultText`).innerHTML="checking..";
   let src=[d]
   let now="blue"
@@ -180,9 +202,11 @@ const bip=async()=>{
 
   if(document.getElementById(`resultText`).innerHTML==="checking..")
   {document.getElementById(`resultText`).innerHTML="the graph is bipartite";}
-  for(let i=0;i<nodes-1;i++){
-    document.getElementById(`${arr[i]}`).style.backgroundColor="green";
-  }
+  // for(let i=0;i<nodes-1;i++){
+  //   document.getElementById(`${arr[i]}`).style.backgroundColor="green";
+  // }
+setrunning(0)
+
 }
 
   const handleClick=async()=>{
@@ -351,7 +375,6 @@ const bip=async()=>{
 
   const adjmatfn=()=>{
     let mat="Adjacency Matrix is: \n [ \n"
-    let i=1;
     adjMat.slice(1,nodes).forEach(element => {
       let st=`[`
       element.slice(1,nodes).forEach(e=>{st+=` ${e},`})
@@ -372,6 +395,31 @@ const bip=async()=>{
       mat+="\n"
     });
     alert(mat)
+  }
+  const delnode=()=>{
+    if(nodes<2){return}
+    console.log("endbn",arr,nodes,arr[nodes-2])
+    document.getElementById(`${arr[nodes-2]}`).style.backgroundColor="white";
+    document.getElementById(`${arr[nodes-2]}`).style.borderRadius="100%";
+    document.getElementById(`${arr[nodes-2]}`).innerHTML=``;
+    setarr([...arr.slice(0,-1)])
+    Setnodes(nodes-1)
+    let t=[]
+    adjlist.slice(0,-1).forEach(ele=> {
+      let aaaa=[]
+      ele.forEach(e => {
+        if(e!==nodes-1){aaaa.push(e)}
+      });
+      t.push(aaaa)
+    });
+    // console.log(t)
+    setadjlist(t)
+    let ti=[];
+    adjMat.slice(0,-1).forEach(e => {
+      ti.push(e.slice(0,-1))
+    });
+    setadjMat(ti)
+    // console.log(ti)
   }
 
         return (
@@ -401,6 +449,9 @@ const bip=async()=>{
                   </label>
                   <input type="submit" value="submit" />
                 </form>
+              </div>
+              <div>
+                <button onClick={delnode}>Undo node</button>
               </div>
               <div style={{marginBottom:"30px",marginTop:"30px"}}>
                 <button onClick={bfs} style={{marginLeft:"1px"}}>bfs</button>
