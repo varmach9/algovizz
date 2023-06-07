@@ -6,12 +6,6 @@ const Paths = () => {
   const[start,setstart]=useState(-1)
   const[end,setend]=useState(-1)
   const setwall=()=>{
-    // setstart(0)
-    // document.getElementById(`${0}`).innerHTML="<img src='start.jpg' alt='n' height=29px width=29px/>"
-    // document.getElementById(`${0}`).style.backgroundColor="grey"
-    // setend(516)
-    // document.getElementById(`${516}`).innerHTML="<img src='end.jpg' alt='n' height=29px width=29px/>"
-    // document.getElementById(`${516}`).style.backgroundColor="violet"
     for(let i=0;i<40;i++){
       let k=Math.floor(Math.random()*20);
       let j=Math.floor(Math.random()*30);
@@ -22,6 +16,7 @@ const Paths = () => {
     }
   }
   const clearb=()=>{
+    if(running){return}
     setstart(-1)
     setend(-1)
     setmode(1)
@@ -30,7 +25,6 @@ const Paths = () => {
     document.getElementById("b3").style.backgroundColor="white"
     document.getElementById("b4").style.backgroundColor="white"
     document.getElementById("b5").style.backgroundColor="white"
-    document.getElementById("b6").style.backgroundColor="white"
     for(let i=0;i<20;i++){
       for(let j=0;j<30;j++){
         document.getElementById(`${100*i+j}`).innerHTML=""
@@ -58,7 +52,6 @@ const Paths = () => {
     if(running){return}
     document.getElementById("b4").style.backgroundColor="red"
     document.getElementById("b5").style.backgroundColor="white"
-    // document.getElementById("b6").style.backgroundColor="white"
     setrunning(1)
     let visited=[start]
     let parent={} 
@@ -100,7 +93,6 @@ const Paths = () => {
   const dfs=async()=>{
     if(running){return}
     document.getElementById("b4").style.backgroundColor="white"
-    // document.getElementById("b6").style.backgroundColor="white"
     document.getElementById("b5").style.backgroundColor="red"
     setrunning(1)
     let visited=[start]
@@ -135,14 +127,6 @@ const Paths = () => {
     }
     setrunning(0)
   }
-  // const astar=()=>{
-  //   if(running){return}
-  //   document.getElementById("b5").style.backgroundColor="white"
-  //   document.getElementById("b4").style.backgroundColor="white"
-  //   document.getElementById("b6").style.backgroundColor="red"
-  //   setrunning(1)
-  //   setrunning(0)
-  // }
   return (
     <div style={{display:"flex"}}>
       <div style={{ width:"300px"}}>
@@ -175,7 +159,6 @@ const Paths = () => {
           <div>Algorithms</div>
         <button onClick={bfs}  id='b4'>BFS(or)Djkstra</button>
         <button onClick={dfs}  id='b5'>DFS</button>
-        {/* <button onClick={astar}id='b6'>A*</button> */}
         </div>
       </div>
         
