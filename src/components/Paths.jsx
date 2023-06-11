@@ -137,7 +137,6 @@ const Paths = () => {
               document.getElementById("b1").style.backgroundColor="red"
               document.getElementById("b2").style.backgroundColor="white"
               document.getElementById("b3").style.backgroundColor="white"
-
           }} id="b1">startnode</button>
           <button onClick={()=>{setmode(2)
               document.getElementById("b2").style.backgroundColor="red"

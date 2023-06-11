@@ -7,7 +7,9 @@ const Home = () => {
   return (
     
     <div className='App'>
-        <div className='heading'>Home</div>
+        <div className='heading'>
+          <h1>ALGOVIZ</h1>
+        </div>
         <Link to="/sort">Sorting Algos</Link>
         <br></br>
         <button onClick={() => openInNewTab('/graph')}>graph Algos</button>
@@ -16,7 +18,7 @@ const Home = () => {
         <br></br>
         <Link to="/pathfind">Path finding</Link>
         <br></br>
-        <Link to="/pathfind">CPU Scheduling Algorithms</Link>
+        <Link to="/cpu">CPU Scheduling Algorithms</Link>
         <br></br>
         <div>
             <div>BackTracking Algorithms</div>
@@ -38,7 +40,7 @@ const Home = () => {
         </div>
         <div>
             <div>DP</div>
-            <Link to="/nq">LCS</Link>
+            <Link to="/lcs">LCS</Link>
             <br></br>
             <Link to="/nq">Knapsack</Link>
             <br></br>

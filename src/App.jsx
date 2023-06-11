@@ -7,13 +7,11 @@ import Graphs from './components/Graphs';
 import Paths from "./components/Paths"
 import Primenumber from "./components/Primenumber"
 import Twosum from './components/Tarsum';
+import Cpu from "./components/Cpu";
+import Lcs from "./components/Lcs"
 
 function App() {
   return (
-    // <div className='App'>
-    //   <Header/>
-    //   <Sorting/>
-    // </div>
       <BrowserRouter>
       <Header />
           <Routes>
@@ -23,6 +21,8 @@ function App() {
               <Route path="/pathfind" element={<Paths/>}/>
               <Route path="/primefinder" element={<Primenumber/>}/>
               <Route path="/tar-sum" element={<Twosum/>}/>
+              <Route path="/cpu" element={<Cpu/>}/>
+              <Route path="/lcs" element={<Lcs/>}/>
 
           </Routes>
         {/* <Footer /> */}
