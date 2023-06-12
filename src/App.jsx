@@ -9,6 +9,9 @@ import Primenumber from "./components/Primenumber"
 import Twosum from './components/Tarsum';
 import Cpu from "./components/Cpu";
 import Lcs from "./components/Lcs"
+import Knp from './components/Knapsack';
+import Nqueen from './components/Nqueen';
+import Sudoku from './components/Sudoku';
 
 function App() {
   return (
@@ -23,6 +26,9 @@ function App() {
               <Route path="/tar-sum" element={<Twosum/>}/>
               <Route path="/cpu" element={<Cpu/>}/>
               <Route path="/lcs" element={<Lcs/>}/>
+              <Route path="/knapsack" element={<Knp/>}/>
+              <Route path="/nqueen" element={<Nqueen/>}/>
+              <Route path="/sudoku" element={<Sudoku/>}/>
 
           </Routes>
         {/* <Footer /> */}

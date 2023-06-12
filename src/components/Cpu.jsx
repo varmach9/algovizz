@@ -985,7 +985,7 @@ const Cpu = () => {
                 </form>
     </div>
         <div style={{display:"flex",marginTop:"30px"}}>
-        <div id="ready-queue" style={{width:"1400px",marginLeft:"100px"}}>
+        <div id="ready-queue" style={{width:"900px",marginLeft:"100px"}}>
             <div>Ready-Queue</div>
             <div style={{display:"flex",justifyContent:"left"}}>
                         <div style={{width:"60px",textAlign:"center",paddingRight:"10px"}}>P</div>
@@ -996,7 +996,7 @@ const Cpu = () => {
                     </div>
             <div id="elementsinq" style={{marginTop:"10px"}}>
             {q.map((k,v)=>{
-                        return <div style={{display:"flex",justifyContent:"left",marginBottom:"2px",border:"solid"}}>
+                        return <div style={{display:"flex",justifyContent:"left",marginBottom:"2px",}}>
                         <div style={{width:"60px",textAlign:"center",paddingRight:"10px"}}>P-{pro[k][0]}</div>
                         <div className='progress'  style={{width:"200px", border:"1px solid", textAlign:"center",backgroundColor: "grey"}}>
                             {}

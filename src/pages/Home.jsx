@@ -22,9 +22,9 @@ const Home = () => {
         <br></br>
         <div>
             <div>BackTracking Algorithms</div>
-            <Link to="/nq">N-Queen</Link>
+            <Link to="/nqueen">N-Queen</Link>
             <br></br>
-            <Link to="/nq">Sudoku-6x6</Link>
+            <Link to="/sudoku">Sudoku</Link>
             <br></br>
         </div>
         <div>
@@ -42,12 +42,12 @@ const Home = () => {
             <div>DP</div>
             <Link to="/lcs">LCS</Link>
             <br></br>
-            <Link to="/nq">Knapsack</Link>
+            <Link to="/knapsack">Knapsack</Link>
             <br></br>
         </div>
         <div>Other Famous Algorithms</div>
         <div>
-            <Link to="/graph">Binary Serch Algorithm</Link>
+            <Link to="/graph">Binary Search Algorithm</Link>
             <br></br>
             <Link to="/primefinder">Prime Number Finder</Link>
             <br></br>
