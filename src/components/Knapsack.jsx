@@ -27,10 +27,10 @@ const Knp = () => {
         console.log(document.getElementById(0).innerHTML)
         await sleep(1000)
         for (let i=0;i<a.length+1;i++){
-            document.getElementById(i*100).innerHTML=1
+            document.getElementById(i*100).innerHTML=0
             document.getElementById(i*100).style.backgroundColor="grey"}
         for (let i=0;i<mw+1;i++){
-            if(i!==0){mat[0][i]=-1000}
+            if(i!==0){mat[0][i]=-1000000}
                 document.getElementById(i).style.backgroundColor="grey"}
         await sleep(1000)
         for(let i=1;i<a.length+1;i++){
@@ -39,13 +39,13 @@ const Knp = () => {
                 document.getElementById(100*i+j-100).style.backgroundColor="green"
                 console.log(i,j,a[i-1],b[i-1])
                 if(j>=a[i-1]){
-                    mat[i][j]=Math.max(mat[i-1][j],mat[i-1][j-a[i-1]]+b[i-1],mat[i][j])
+                    mat[i][j]=Math.max(mat[i-1][j],mat[i-1][j-a[i-1]]+b[i-1])
                     document.getElementById(100*i+j-a[i-1]-100).style.backgroundColor="green"
                 }
                 else{
-                    mat[i][j]=Math.max(mat[i-1][j],mat[i][j])
+                    mat[i][j]=Math.max(mat[i-1][j])
                 }
-                    document.getElementById(100*i+j).innerHTML=mat[i][j]
+                    document.getElementById(100*i+j).innerHTML=Math.max(0,mat[i][j])
                 await sleep(500)
                 
                 document.getElementById(100*i+j).style.backgroundColor="grey"
@@ -76,10 +76,10 @@ const Knp = () => {
         console.log(document.getElementById(0).innerHTML)
         await sleep(1000)
         for (let i=0;i<a.length+1;i++){
-            document.getElementById(i*100).innerHTML=1
+            document.getElementById(i*100).innerHTML=0
             document.getElementById(i*100).style.backgroundColor="grey"}
         for (let i=0;i<mw+1;i++){
-            if(i!==0){mat[0][i]=-1000}
+            if(i!==0){mat[0][i]=-1000000}
                 document.getElementById(i).style.backgroundColor="grey"}
         await sleep(1000)
         for(let i=1;i<a.length+1;i++){
@@ -88,13 +88,13 @@ const Knp = () => {
                 document.getElementById(100*i+j-100).style.backgroundColor="green"
                 console.log(i,j,a[i-1],b[i-1])
                 if(j>=a[i-1]){
-                    mat[i][j]=Math.max(mat[i-1][j],mat[i][j-a[i-1]]+b[i-1],mat[i][j])
+                    mat[i][j]=Math.max(mat[i-1][j],mat[i][j-a[i-1]]+b[i-1])
                     document.getElementById(100*i+j-a[i-1]).style.backgroundColor="green"
                 }
                 else{
-                    mat[i][j]=Math.max(mat[i-1][j],mat[i][j])
+                    mat[i][j]=Math.max(mat[i-1][j])
                 }
-                    document.getElementById(100*i+j).innerHTML=mat[i][j]
+                    document.getElementById(100*i+j).innerHTML=Math.max(0,mat[i][j])
                 await sleep(500)
                 
                 document.getElementById(100*i+j).style.backgroundColor="grey"
