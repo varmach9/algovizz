@@ -4,11 +4,13 @@ import merger from './utils/MergeSort'
 import Heapsort from './utils/HeapSort'
 import quicky from './utils/QuickSort'
 import "../../src/App.css"
+import 'bootstrap/dist/css/bootstrap.css';
 
 class Sorting extends Component  {
 
     state = {
         count: 40,
+        countsetter:40,
         rects: [],
         speed: 100,
         isRunning: 0,
@@ -35,7 +37,7 @@ class Sorting extends Component  {
     BubbleSort=async()=>{ 
         if (this.state.isRunning){return}
         this.setState({isRunning:1})
-        this.setState({displaybox:"bubbles"})
+        this.setState({algo:0})
         console.log("in bb sort")
         let arr=this.state.rects;
             for (var i = 0; i < arr.length; i++) {
@@ -66,8 +68,9 @@ class Sorting extends Component  {
 
         InsertionSort=async()=>{ 
             if (this.state.isRunning){return}
-        this.setState({isRunning:1})
-        this.setState({displaybox:"inshirt"})
+        this.setState({isRunning:1})        
+        this.setState({algo:2})
+
             document.getElementById(`rect-${0}`).style.backgroundColor="orange";
             console.log("in insertion sort")
                 let arr=this.state.rects;
@@ -109,7 +112,8 @@ class Sorting extends Component  {
 StartMergeSort = async()=>{
     if (this.state.isRunning){return}
         this.setState({isRunning:1})
-        this.setState({displaybox:"mergerssss"})
+        this.setState({algo:3})
+
     let values=merger(this.state.rects)
     console.log(values)
     for(let i=0;i<values.length;i++){
@@ -161,7 +165,8 @@ StartMergeSort = async()=>{
 StartHeapSort = async()=>{
     if (this.state.isRunning){return}
         this.setState({isRunning:1})
-        this.setState({displaybox:"heaps of respect"})
+        this.setState({algo:5})
+
     let values=Heapsort(this.state.rects)
     for(let i=0;i<values.length;i++){
     console.log(values[i])
@@ -211,7 +216,8 @@ StartHeapSort = async()=>{
 StartQuickSort = async()=>{
     if (this.state.isRunning){return}
         this.setState({isRunning:1})
-        this.setState({displaybox:"fast"})
+        this.setState({algo:4})
+
     let values=quicky(this.state.rects)
     console.log(values)
     for(let i=0;i<values.length;i++){
@@ -237,7 +243,8 @@ StartQuickSort = async()=>{
 SelectionSort=async()=>{
     if (this.state.isRunning){return}
         this.setState({isRunning:1})
-        this.setState({displaybox:"selection hogaya mera?"})
+        this.setState({algo:1})
+
     let inputArr= this.state.rects;
     let n = inputArr.length;
         
@@ -267,6 +274,7 @@ SelectionSort=async()=>{
              {document.getElementById(`rect-${min}`).style.backgroundColor="green"; }
         }
     }
+    this.setState({isRunning:0})
     return inputArr;
   }
 
@@ -295,20 +303,23 @@ SelectionSort=async()=>{
         });
         this.setState({count : realArr.length})
         this.setState({rects:realArr})
+        for(let i=0;i<this.state.rects.length;i++){document.getElementById(`rect-${i}`).style.backgroundColor="green"}
         event.preventDefault();
       }
       handleChange2=(event)=> {
-        this.setState({count: event.target.value});
+        this.setState({countsetter: event.target.value});
         
       }
     
     handleSubmit2=(event)=> {
         if (this.state.isRunning){return}
+        this.setState({count:this.state.countsetter})
         let temp=[]
-        for (let i = 0; i < this.state.count; i++) {
+        for (let i = 0; i < this.state.countsetter; i++) {
             temp.push(Math.floor(Math.random() * 20)+1)
         }
         this.setState({rects:temp})
+        for(let i=0;i<this.state.rects.length;i++){document.getElementById(`rect-${i}`).style.backgroundColor="green"}
         console.log(this.state.count)
         event.preventDefault();
       }
@@ -327,62 +338,63 @@ SelectionSort=async()=>{
 render(){ 
   return (
         <div className='App'>
-        <div>Sorting</div>
+        <div style={{display:"flex"}}>
+        <div style={{width:"590px",backgroundColor:""}}>
+        <div style={{diaplay:"flex",justifyContent:"center"}}> <h3>Sorting</h3></div>
+        <div>sidebar</div>
+        <div id='aboutalgo' style={{height:"200px"}}>ABOUT</div>
+        <div>
+            <img src="timecomplexity.png" style={{width:"550px"}} alt=""></img>
+        </div>
+        </div>
+        <div style={{alignContent:"center",width:"800px",marginLeft:"30px"}}>
         <div>
             <div>
-                <div>Enter an Array Manually...</div>
+                <div style={{fontWeight:"bold",fontFamily:"sans-serif"}}>Customize Array</div>
                 <form onSubmit={this.handleSubmit}>
                   <label>
                     Array input:
-                    <input type="text" value={this.state.value} onChange={this.handleChange}/>
+                    <input type="text" value={this.state.value} onChange={this.handleChange} style={{marginLeft:"5px"}}/>
                   </label>
-                  <input type="submit" value="Submit" />
+                  <input type="submit" value="Submit" class="btn btn-warning btn-sm" style={{marginLeft:"5px"}}/>
                 </form>
-                <form onSubmit={this.handleSubmit2}>
+                <form onSubmit={this.handleSubmit2}  style={{marginLeft:"5px"}}>
                   <label>
-                    length input:
-                    <input type="integer"  value={this.state.count} onChange={this.handleChange2}/>
+                    Set Length:
+                    <input type="integer"  value={this.state.countsetter} onChange={this.handleChange2} style={{marginLeft:"5px"}}/>
                   </label>
-                  <input type="submit" value="Submit" />
+                  <input type="submit" value="Submit" class="btn btn-warning btn-sm" style={{marginLeft:"5px"}}/>
                 </form>
             </div>
-            <button onClick={this.BubbleSort}style={{color: !this.state.isRunning?"red":"white"}}>Bubble Sort</button>
-            <button onClick={this.SelectionSort}style={{color: !this.state.isRunning?"red":"white"}}>Selection Sort</button>
-            <button onClick={this.InsertionSort}style={{color: !this.state.isRunning?"red":"white"}}>Insertion Sort</button>
-            <button onClick={this.StartMergeSort} style={{color: !this.state.isRunning?"red":"white"}}>Merge Sort</button>
-            <button onClick={this.StartQuickSort}style={{color: !this.state.isRunning?"red":"white"}}>Quick Sort</button>
-            <button onClick={this.StartHeapSort}style={{color: !this.state.isRunning?"red":"white"}}>Heap Sort</button>
-            <button onClick={this.Randomize} style={{color: !this.state.isRunning?"red":"white"}}>Randomize array</button>
+            <button type="button" class="btn btn-primary btn-sm" onClick={this.BubbleSort}    style={{ marginLeft:"5px", marginTop:"10px", backgroundColor: !this.state.isRunning?"":((this.state.algo===0)?"green":"lightblue")}}>Bubble Sort</button>
+            <button type="button" class="btn btn-primary btn-sm" onClick={this.SelectionSort} style={{ marginLeft:"5px", marginTop:"10px", backgroundColor: !this.state.isRunning?"":((this.state.algo===1)?"green":"lightblue")}}>Selection Sort</button>
+            <button type="button" class="btn btn-primary btn-sm" onClick={this.InsertionSort} style={{ marginLeft:"5px", marginTop:"10px", backgroundColor: !this.state.isRunning?"":((this.state.algo===2)?"green":"lightblue")}}>Insertion Sort</button>
+            <button type="button" class="btn btn-primary btn-sm" onClick={this.StartMergeSort}style={{ marginLeft:"5px", marginTop:"10px", backgroundColor: !this.state.isRunning?"":((this.state.algo===3)?"green":"lightblue")}}>Merge Sort</button>
+            <button type="button" class="btn btn-primary btn-sm" onClick={this.StartQuickSort}style={{ marginLeft:"5px", marginTop:"10px", backgroundColor: !this.state.isRunning?"":((this.state.algo===4)?"green":"lightblue")}}>Quick Sort</button>
+            <button type="button" class="btn btn-primary btn-sm" onClick={this.StartHeapSort} style={{ marginLeft:"5px", marginTop:"10px", backgroundColor: !this.state.isRunning?"":((this.state.algo===5)?"green":"lightblue")}}>Heap Sort</button>
+            <button type="button" class="btn btn-primary btn-sm" onClick={this.Randomize}     style={{ marginLeft:"5px", marginTop:"10px", backgroundColor: !this.state.isRunning?"":((this.state.algo===6)?"green":"lightblue")}}>Randomize array</button>
         </div>
-        <div>{this.state.displaybox}</div>
-        <div>Speed Variation</div>
+        <div style={{display:"flex",justifyContent:"center",marginTop:"10px"}}>
+        <div style={{marginTop:"5px"}}>Adjust Speed:</div>
             <div>
-                <button onClick={this.Makeslow}>slow</button>
-                <button onClick={this.Makemedium}>medium</button>
-                <button onClick={this.Makefast}>fast</button>
+                <button type="button" className={classNames("btn", (this.state.speed!==100)?"btn-light":"btn-info", "btn-sm", "border",(this.state.speed===100)?"border-link":"",(this.state.speed===100)?"border-5":"")} style={{marginLeft:"10px"}} onClick={this.Makeslow}>Slow</button>
+                <button type="button" className={classNames("btn", (this.state.speed!==25)?"btn-light": "btn-info", "btn-sm", "border",(this.state.speed===25)?"border-link": "",(this.state.speed===25)?"border-5":"")} style={{marginLeft:"10px" }} onClick={this.Makemedium}>Medium</button>
+                <button type="button" className={classNames("btn", (this.state.speed!==10)?"btn-light": "btn-info", "btn-sm", "border",(this.state.speed===10)?"border-link": "",(this.state.speed===10)?"border-5":"")} style={{marginLeft:"10px" }} onClick={this.Makefast}>Fast</button>
             </div>
-        <div style={{display:"flex", paddingTop:"100px"}}>
+        </div>
+        <div style={{display:"flex", paddingTop:"50px"}}>
             {this.state.rects?.map((val,index)=>{
             return <div id={index}>
                         <div>{val}</div>
-                        <div style={{width:`${Math.floor(40*20/this.state.count)}px`, height:`${20*val}px`, backgroundColor:"green", margin:`${Math.floor(10*10/this.state.count)}px`}} id={`rect-${index}`}></div>
+                        <div style={{width:`${Math.floor(40*20/this.state.count)}px`, height:`${20*val}px`, backgroundColor:"green", marginRight:`${Math.floor(10*10/this.state.count)}px`, borderRadius:"5px"}} id={`rect-${index}`}></div>
                     </div>})
             }
         </div>
     </div>
+    </div>
+    </div>
   );
 }
-
-
-// handleCountChange = (val) => {
-//     this.setState({count: val});
-//     this.handleRandomize();
-// }
-
-// handleSpeedChanged = (val) => {
-//     const speed = (110 - val);
-//     this.setState({speed});
-// }
 
 
 }
@@ -390,4 +402,7 @@ render(){
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+function classNames(...args) {
+    return args.filter(Boolean).join(' ')
+  }
 export default Sorting

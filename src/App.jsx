@@ -15,6 +15,7 @@ import Sudoku from './components/Sudoku';
 import Search from './components/Search';
 import Editdis from './components/Editdis';
 import TowersOfHanoi from './components/Toh';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -37,7 +38,7 @@ function App() {
               <Route path="/toh" element={<TowersOfHanoi/>}/>
 
           </Routes>
-        {/* <Footer /> */}
+        <Footer/>
     </BrowserRouter>
   );
 }
