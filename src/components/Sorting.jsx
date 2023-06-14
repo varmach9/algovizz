@@ -5,6 +5,9 @@ import Heapsort from './utils/HeapSort'
 import quicky from './utils/QuickSort'
 import "../../src/App.css"
 import 'bootstrap/dist/css/bootstrap.css';
+import BubbleSortCode from './utils/Bs'
+import SortingAlgorithms from './utils/Bs'
+import YoutubeEmbed from './utils/Youtube'
 
 class Sorting extends Component  {
 
@@ -14,10 +17,9 @@ class Sorting extends Component  {
         rects: [],
         speed: 100,
         isRunning: 0,
-        algo: 0,
+        algo: 9,
         inputString:"enter",
         value:"",
-        displaybox:""
     }
     constructor(props) {
         super(props);
@@ -337,20 +339,22 @@ SelectionSort=async()=>{
     }
 render(){ 
   return (
-        <div className='App'>
+        <div className='App' style={{marginLeft:"30px"}}>
         <div style={{display:"flex"}}>
-        <div style={{width:"590px",backgroundColor:""}}>
-        <div style={{diaplay:"flex",justifyContent:"center"}}> <h3>Sorting</h3></div>
-        <div>sidebar</div>
-        <div id='aboutalgo' style={{height:"200px"}}>ABOUT</div>
+        <div style={{width:"540px",backgroundColor:""}}>
+        <div id='aboutalgo' style={{display:"flex",justifyContent:"center",paddingBottom:"10px",height:""}}>
+            <SortingAlgorithms/>
+        </div>
         <div>
-            <img src="timecomplexity.png" style={{width:"550px"}} alt=""></img>
+            <img src="timecomplexity.png" style={{width:"500px"}} loading="lazy" alt=""></img>
         </div>
         </div>
         <div style={{alignContent:"center",width:"800px",marginLeft:"30px"}}>
         <div>
             <div>
-                <div style={{fontWeight:"bold",fontFamily:"sans-serif"}}>Customize Array</div>
+                <div style={{fontWeight:"bold",fontFamily:"sans-serif"}}>
+                    Customize Array
+                    </div>
                 <form onSubmit={this.handleSubmit}>
                   <label>
                     Array input:
@@ -392,6 +396,33 @@ render(){
         </div>
     </div>
     </div>
+    <div style={{display:"flex",marginTop:"30px",marginLeft:"50px",color:"orangered"}}><h2>Learn More </h2></div>
+    <hr style={{width:"95%",margin:"auto"}}></hr>
+    <div className='row' style={{display: "flex",marginTop:"30px",color:"green"}}>
+        
+   <div className="col " style={{paddingLeft:"0px"}}><YoutubeEmbed embedId="6Gv8vg0kcHc" title="Bubble Sort" />  </div>
+   <div className="col " style={{paddingLeft:"0px"}}><YoutubeEmbed embedId="nKzEJWbkPbQ" title="Insertion Sort"/></div>
+   <div className="col " style={{paddingLeft:"0px"}}><YoutubeEmbed embedId="xWBP4lzkoyM" title="Selection Sort"/></div>
+   <div className="col " style={{paddingLeft:"0px"}}><YoutubeEmbed embedId="KF2j-9iSf4Q" title="Merge Sort"/>    </div>
+   <div className="col " style={{paddingLeft:"0px"}}><YoutubeEmbed embedId="SLauY6PpjW4" title="Quick Sort"/>    </div> 
+   <div className="col " style={{paddingLeft:"0px"}}><YoutubeEmbed embedId="2DmK_H7IdTo" title="Heap Sort"/>     </div> 
+   <div className="col " style={{paddingLeft:"0px"}}><YoutubeEmbed embedId="UqmKiz2P0Lw" title="Time Complexity of sorting Algorithms"/>     </div> 
+   <div className="col " style={{paddingLeft:"0px"}}>     </div> 
+
+    </div>
+
+    <div>
+    <div style={{display:"flex",marginTop:"30px",marginLeft:"50px",color:"orangered"}}><h2>Practice Sorting</h2></div>
+    <hr style={{width:"95%",margin:"auto"}}></hr>
+<div style={{textAlign:"left"}}>
+<ul><li><strong>Easy:</strong><ol><li><a href="https://www.geeksforgeeks.org/sort-elements-by-frequency/">Sort elements by frequency</a></li><li><a href="https://www.geeksforgeeks.org/sort-an-array-of-0s-1s-and-2s/">Sort an array of 0s, 1s and 2s</a></li><li><a href="https://www.geeksforgeeks.org/sort-numbers-stored-on-different-machines/">Sort numbers stored on different machines</a></li><li><a href="https://www.geeksforgeeks.org/sort-array-wave-form-2/">Sort an array in wave form</a></li><li><a href="https://www.geeksforgeeks.org/check-if-any-two-intervals-overlap-among-a-given-set-of-intervals/">Check if any two intervals overlap among a given set of intervals</a></li><li><a href="https://www.geeksforgeeks.org/how-to-sort-an-array-of-dates-in-cc/">How to sort an array of dates in C/C++?</a></li><li><a href="https://www.geeksforgeeks.org/sorting-strings-using-bubble-sort-2/">Sorting Strings using Bubble Sort</a></li><li><a href="https://www.geeksforgeeks.org/find-missing-elements-of-a-range/">Find missing elements of a range</a></li><li><a href="https://www.geeksforgeeks.org/sort-array-according-count-set-bits/">Sort an array according to count of set bits</a></li><li><a href="https://www.geeksforgeeks.org/sort-even-placed-elements-increasing-odd-placed-decreasing-order/">Sort even-placed elements in increasing and odd-placed in decreasing order</a></li><li><a href="https://www.geeksforgeeks.org/sort-array-two-halves-sorted/">Sort an array when two halves are sorted</a></li><li><a href="https://www.geeksforgeeks.org/sorting-big-integers/">Sorting Big Integers</a></li><li><a href="https://www.geeksforgeeks.org/sort-a-linked-list-of-0s-1s-or-2s/">Sort a linked list of 0s, 1s and 2s</a></li></ol></li><li><strong>Medium:</strong><ol><li><a href="https://www.geeksforgeeks.org/inversion-count-in-array-using-merge-sort/">Inversion count in Array using Merge Sort</a></li><li><a href="https://www.geeksforgeeks.org/minimum-length-unsorted-subarray-sorting-which-makes-the-complete-array-sorted/">Find the Minimum length Unsorted Subarray, sorting which makes the complete array sorted</a></li><li><a href="https://www.geeksforgeeks.org/nearly-sorted-algorithm/">Sort a nearly sorted (or K sorted) array</a></li><li><a href="https://www.geeksforgeeks.org/sort-n-numbers-range-0-n2-1-linear-time/">Sort n numbers in range from 0 to n^2 – 1 in linear time</a></li><li><a href="https://www.geeksforgeeks.org/sort-array-according-order-defined-another-array/">Sort an array according to the order defined by another array</a></li><li><a href="https://www.geeksforgeeks.org/find-the-point-where-maximum-intervals-overlap/">Find the point where maximum intervals overlap</a></li><li><a href="https://www.geeksforgeeks.org/find-a-permutation-that-causes-worst-case-of-merge-sort/">Find a permutation that causes worst case of Merge Sort</a></li><li><a href="https://www.geeksforgeeks.org/sort-vector-of-pairs-in-ascending-order-in-c/">Sort Vector of Pairs in ascending order in C++</a></li><li><a href="https://www.geeksforgeeks.org/minimum-swaps-to-make-two-array-identical/">Minimum swaps to make two arrays identical</a></li><li><a href="https://www.geeksforgeeks.org/chocolate-distribution-problem/">Chocolate Distribution Problem</a></li><li><a href="https://www.geeksforgeeks.org/permute-two-arrays-sum-every-pair-greater-equal-k/">Permute two arrays such that sum of every pair is greater or equal to K</a></li><li><a href="https://www.geeksforgeeks.org/bucket-sort-to-sort-an-array-with-negative-numbers/">Bucket Sort To Sort an Array with Negative Numbers</a></li><li><a href="https://www.geeksforgeeks.org/sort-matrix-way-increasing-order/">Sort a Matrix in all way increasing order</a></li><li><a href="https://www.geeksforgeeks.org/convert-an-array-to-reduced-form-using-vector-of-pairs/">Convert an Array to reduced form using Vector of pairs</a></li><li><a href="https://www.geeksforgeeks.org/smallest-difference-triplet-from-three-arrays/">Smallest Difference Triplet from Three arrays</a></li><li><a href="https://www.geeksforgeeks.org/check-possible-sort-array-conditional-swapping-adjacent-allowed/">Check if it is possible to sort an array with conditional swapping of adjacent allowed</a></li></ol></li><li><strong>Hard:</strong><ol><li><a href="https://www.geeksforgeeks.org/find-surpasser-count-of-each-element-in-array/">Find Surpasser Count of each element in array</a></li><li><a href="https://www.geeksforgeeks.org/count-distinct-occurrences-as-a-subsequence/">Count distinct occurrences as a subsequence</a></li><li><a href="https://www.geeksforgeeks.org/count-minimum-number-subsets-subsequences-consecutive-numbers/">Count minimum number of subsets (or subsequences) with consecutive numbers</a></li><li><a href="https://www.geeksforgeeks.org/k-numbers-difference-maximum-minimum-k-number-minimized/">Chose k array elements such that difference of maximum and minimum is minimized</a></li><li><a href="https://www.geeksforgeeks.org/minimum-swap-required-convert-binary-tree-binary-search-tree/">Minimum swap required to convert binary tree to binary search tree</a></li><li><a href="https://www.geeksforgeeks.org/k-th-smallest-element-removing-integers-natural-numbers/">K-th smallest element after removing some integers from natural numbers</a></li><li><a href="https://www.geeksforgeeks.org/maximum-difference-between-frequency-of-two-elements-such-that-element-having-greater-frequency-is-also-greater/">Maximum difference between frequency of two elements such that element having greater frequency is also greater</a></li><li><a href="https://www.geeksforgeeks.org/minimum-swaps-reach-permuted-array-2-positions-left-swaps-allowed/">Minimum swaps to reach permuted array with at most 2 positions left swaps allowed</a></li><li><a href="https://www.geeksforgeeks.org/find-whether-possible-make-array-elements-using-one-external-number/">Find whether it is possible to make array elements same using one external number</a></li><li><a href="https://www.geeksforgeeks.org/sort-array-applying-given-equation/">Sort an array after applying the given equation</a></li><li><a href="https://www.geeksforgeeks.org/print-array-strings-sorted-order-without-copying-one-string-another/">Print array of strings in sorted order without copying one string into another</a></li></ol></li></ul>
+</div>
+
+
+
+
+    </div>
+    
     </div>
   );
 }

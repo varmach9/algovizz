@@ -8,6 +8,8 @@ const Home = () => {
     
     <div className='App'>
         <div className='heading'>
+<marquee behavior="scroll" direction="right"><img src="http://www.htmlcodes.ws/images/marquees/bee.gif" width="72" height="79" alt="Flying bee in a marquee" /></marquee>
+
           <h1>ALGOVIZ</h1>
         </div>
         <Link to="/sort">Sorting Algos</Link>
