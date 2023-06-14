@@ -12,6 +12,9 @@ import Lcs from "./components/Lcs"
 import Knp from './components/Knapsack';
 import Nqueen from './components/Nqueen';
 import Sudoku from './components/Sudoku';
+import Search from './components/Search';
+import Editdis from './components/Editdis';
+import TowersOfHanoi from './components/Toh';
 
 function App() {
   return (
@@ -29,6 +32,9 @@ function App() {
               <Route path="/knapsack" element={<Knp/>}/>
               <Route path="/nqueen" element={<Nqueen/>}/>
               <Route path="/sudoku" element={<Sudoku/>}/>
+              <Route path="/search" element={<Search/>}/>
+              <Route path="/ed" element={<Editdis/>}/>
+              <Route path="/toh" element={<TowersOfHanoi/>}/>
 
           </Routes>
         {/* <Footer /> */}

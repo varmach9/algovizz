@@ -27,31 +27,25 @@ const Home = () => {
             <Link to="/sudoku">Sudoku</Link>
             <br></br>
         </div>
-        <div>
-            <div>Recursion</div>
-            <Link to="/nq">Fabinacii-series</Link>
+        <div>Searching</div>
+        <Link to="/search">Search Algorithms</Link>
             <br></br>
-            <Link to="/nq">Combinations</Link>
-            <br></br>
-            <Link to="/nq">towers of hanoi</Link>
-            <br></br>
-        </div><div>
-            <div>Search(linear,binary,exponential)</div>
-        </div>
         <div>
             <div>DP</div>
             <Link to="/lcs">LCS</Link>
             <br></br>
             <Link to="/knapsack">Knapsack</Link>
             <br></br>
+            <Link to="/ed">Edit Distance</Link>
+            <br></br>
         </div>
         <div>Other Famous Algorithms</div>
         <div>
-            <Link to="/graph">Binary Search Algorithm</Link>
-            <br></br>
             <Link to="/primefinder">Prime Number Finder</Link>
             <br></br>
             <Link to="/tar-sum">target-sum</Link>
+            <br></br>
+            <Link to="/toh">towers of hanoi</Link>
             <br></br>
         </div>
     </div>
