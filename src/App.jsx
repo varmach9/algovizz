@@ -25,7 +25,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/sort" element={<Sorting />}/>
               <Route path="/graph" element={<Graphs/>}/>
-              <Route path="/pathfind" element={<Paths/>}/>
+              <Route path="/grid" element={<Paths/>}/>
               <Route path="/primefinder" element={<Primenumber/>}/>
               <Route path="/tar-sum" element={<Twosum/>}/>
               <Route path="/cpu" element={<Cpu/>}/>

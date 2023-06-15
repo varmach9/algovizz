@@ -4,7 +4,7 @@ import React from 'react'
 const Header = () => {
   return (
     <div>
-    <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{paddingLeft:"20px"}}>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{paddingLeft:"20px",width:"1520px"}}>
       <a className="navbar-brand" href="/">
         <img src="start.jpg" alt="" width="40px"></img>
       </a>

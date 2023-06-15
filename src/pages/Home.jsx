@@ -6,7 +6,7 @@ const Home = () => {
   }
   return (
     
-    <div className='App'>
+    <div className='App' style={{width:"1500px"}}>
         <div className='heading'>
 <marquee behavior="scroll" direction="right"><img src="http://www.htmlcodes.ws/images/marquees/bee.gif" width="72" height="79" alt="Flying bee in a marquee" /></marquee>
 
@@ -18,7 +18,7 @@ const Home = () => {
         <img src="https://miro.medium.com/v2/resize:fit:566/1*15KkonMRnHdbzGhFw0PXCA.gif" alt="graphs"></img>
         {/* <Link to="/graph">Graph Algos</Link> */}
         <br></br>
-        <Link to="/pathfind">Path finding</Link>
+        <Link to="/grid">Grid Traversal</Link>
         <br></br>
         <Link to="/cpu">CPU Scheduling Algorithms</Link>
         <br></br>
@@ -50,6 +50,7 @@ const Home = () => {
             <Link to="/toh">towers of hanoi</Link>
             <br></br>
         </div>
+        
     </div>
   )
 }

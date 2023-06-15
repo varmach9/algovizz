@@ -2,16 +2,17 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div>
-      <div>
-
-      </div>
-      <footer className="footer">
-      <div className="container" style={{textAlign:"center",height:"100px"}}>
-        <div className="text-muted">© 2023 Chekuri Srinivasa Varma. All rights reserved.</div>
-      </div>
-    </footer>
+    <div style={{border:"solid",backgroundColor:"brgba(0, 0, 0, 0.2)",PaddingTop:"200px",width:"1520px"}}>
+    <footer class="bg-dark text-center text-white">
+      <div><h3 >Algoviz</h3></div>   
+  
+      <div class="text-center" >
+      Developed by <a href="https://www.linkedin.com/in/srinivasa-varma-chekuri-9130501b2/" style={{color:"lightblue",textDecoration:"none"}}> Chekuri Srinivasa Varma </a>
+    </div><div class="text-center" >
+      © 2023 Copyright 
     </div>
+  </footer>
+  </div>
   )
 }
 

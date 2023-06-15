@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import YoutubeEmbed from './utils/Youtube'
 
 const Paths = () => {
   const [mode,setmode]=useState(1)
@@ -10,7 +11,7 @@ const Paths = () => {
       let k=Math.floor(Math.random()*20);
       let j=Math.floor(Math.random()*30);
       if(100*k+j!==start && 100*k+j!==end){
-      document.getElementById(`${100*k+j}`).innerHTML="<img src='wall.jpg' alt='n' height=29px width=29px/>"
+      document.getElementById(`${100*k+j}`).innerHTML="<img src='walll.jpg' alt='n' height=29px width=29px/>"
       document.getElementById(`${100*k+j}`).style.backgroundColor="grey"
       }
     }
@@ -51,7 +52,7 @@ const Paths = () => {
   const bfs=async()=>{
     if(running){return}
     document.getElementById("b4").style.backgroundColor="red"
-    document.getElementById("b5").style.backgroundColor="white"
+    document.getElementById("b5").style.backgroundColor=""
     setrunning(1)
     let visited=[start]
     let parent={} 
@@ -88,11 +89,12 @@ const Paths = () => {
       arr=newarr
       // break
     }
+    document.getElementById("b4").style.backgroundColor=""
     setrunning(0)
   }
   const dfs=async()=>{
     if(running){return}
-    document.getElementById("b4").style.backgroundColor="white"
+    document.getElementById("b4").style.backgroundColor=""
     document.getElementById("b5").style.backgroundColor="red"
     setrunning(1)
     let visited=[start]
@@ -125,47 +127,71 @@ const Paths = () => {
         break
       }
     }
+    document.getElementById("b5").style.backgroundColor=""
     setrunning(0)
   }
   return (
-    <div style={{display:"flex"}}>
-      <div style={{ width:"300px"}}>
-        <div>sidebar</div>
-        <img src="logo192.png" alt="n" width={"20px"} height={"20px"}></img>
-        <div>
-          <button onClick={()=>{setmode(1)
+    <div>
+      <div style={{display:"flex",justifyContent:"center",width:"1500px"}}><h1 style={{fontWeight:"bolder",color:"blue", textShadow: "0 0 1px blue"}}>Traversal in a Grid</h1></div>
+    
+    <div style={{display:"flex",width:"1500px"}}>
+      <div style={{ width:"600px",paddingLeft:"50px"}}>
+        <div>Controls</div>
+        <div style={{margin:"10px"}}>
+          <button  style={{backgroundColor:"red",marginRight:"10px"}}onClick={()=>{setmode(1)
               document.getElementById("b1").style.backgroundColor="red"
-              document.getElementById("b2").style.backgroundColor="white"
-              document.getElementById("b3").style.backgroundColor="white"
+              document.getElementById("b2").style.backgroundColor=""
+              document.getElementById("b3").style.backgroundColor=""
           }} id="b1">startnode</button>
-          <button onClick={()=>{setmode(2)
+          <button style={{marginRight:"10px"}} onClick={()=>{setmode(2)
               document.getElementById("b2").style.backgroundColor="red"
-              document.getElementById("b1").style.backgroundColor="white"
-              document.getElementById("b3").style.backgroundColor="white"
+              document.getElementById("b1").style.backgroundColor=""
+              document.getElementById("b3").style.backgroundColor=""
               console.log(mode)
           }} id="b2">endnode</button>
-          <button onClick={()=>{setmode(3)
+          <button style={{marginRight:"10px"}} onClick={()=>{setmode(3)
               document.getElementById("b3").style.backgroundColor="red"
-              document.getElementById("b2").style.backgroundColor="white"
-              document.getElementById("b1").style.backgroundColor="white"
+              document.getElementById("b2").style.backgroundColor=""
+              document.getElementById("b1").style.backgroundColor=""
           }} id="b3">wall</button>
         </div>
-        <div>
-        <button onClick={setwall}>Random-wall</button>
+        <div style={{margin:"10px"}}>
+        <button onClick={setwall} style={{marginRight:"10px"}}>Random-wall</button>
         <button onClick={clearb}>clear board</button>
         </div>
-        <div>
-          <div>Algorithms</div>
-        <button onClick={bfs}  id='b4'>BFS(or)Djkstra</button>
+        <div style={{margin:"10px"}}>
+          <div>Select Algorithms to Visualize:</div>
+        <button onClick={bfs}  id='b4' style={{marginRight:"10px"}}>BFS(or)Djkstra</button>
         <button onClick={dfs}  id='b5'>DFS</button>
         </div>
+        <div style={{border:"solid",marginRight:"20px",padding:"10px",color:"green",backgroundColor:""}}>
+        <div className="grid-traversal">
+      <p>
+        The following algorithm can be followed to perform grid traversal:
+      </p>
+      <ol>
+        <li>Initialize the grid with false values to indicate that no cell is visited.</li>
+        <li>Start the traversal using the cell in the grid.</li>
+        <li>Mark the cell as visited.</li>
+        <li>Use the direction vectors to generate the neighbors of the cell.</li>
+        <li>
+          If the generated coordinates are within the matrix and the cell
+          represented by the coordinate is unvisited, then make a recursive call
+          to the traversal function using this coordinate.
+        </li>
+        <li>Repeat the steps 2–5 until all the cells in the grid have been visited.</li>
+      </ol>
+    </div>
+
+        </div>
+        
       </div>
         
-      <div className="Grid" style={{border:"solid",borderColor:"lightblue", margin:"0px",padding:"0px", width:"920px"}}>
+      <div className="Grid" style={{border:"solid",borderColor:"", margin:"0px",padding:"0px", width:"900px",height:"605px"}}>
         {Array.apply(0, Array(20)).map(function (x, i) {
           return  <div className={`row-${i}`} style={{display:"flex",justifyContent:"center"}}>
             {Array.apply(0, Array(30)).map(function (y, j) {
-                return  <div id={`${100*i+j}`} style={{ width:"30px",height:"30px",border:"solid 1px",borderColor:"lightgreen"}} onClick={
+                return  <div id={`${100*i+j}`} style={{ width:"30px",height:"30px",border:"solid 1px",borderColor:"lightgrey"}} onClick={
                   ()=>{
                     if(mode===1){
                       if(document.getElementById(`${100*i+j}`).style.backgroundColor==="grey" && 100*i+j===start){
@@ -194,7 +220,7 @@ const Paths = () => {
                         document.getElementById(`${100*i+j}`).innerHTML=""
                         document.getElementById(`${100*i+j}`).style.backgroundColor="white"
                       }else {
-                      document.getElementById(`${100*i+j}`).innerHTML="<img src='wall.jpg' alt='n' height=29px width=29px/>"
+                      document.getElementById(`${100*i+j}`).innerHTML="<img src='walll.jpg' alt='n' height=29px width=29px/>"
                       document.getElementById(`${100*i+j}`).style.backgroundColor="grey"
                       }
                     }
@@ -204,7 +230,48 @@ const Paths = () => {
         </div>})
         }
         </div>
-    </div>);
+    </div>
+    <div className="yt-section" style={{paddingLeft:"50px"}}>
+    <div style={{display:"flex",marginTop:"30px",color:"orangered"}}><h2>Learn More </h2></div>
+    <hr style={{width:"95%",margin:"auto"}}></hr>
+    <div className='' style={{display: "flex",marginTop:"30px",color:"green",textAlign:"center"}}>
+        
+   <div className="" style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="155rbd224H0" title="DFS in a Grid" /></div>
+   <div className="" style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="wNr-CG0AUPk" title="BFS in a Grid" /></div>
+   <div className="" style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="sduu1n5uZUE" title="Islands Problem"/></div>
+   <div className="" style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="UDQ_FgNbArA" title="Word in a Grid"/></div> 
+    </div>
+   </div>
+   <div style={{marginLeft:"50px"}}>
+    <div style={{display:"flex",marginTop:"30px",marginLeft:"10px",color:"orangered"}}><h2>Practice Grid Trversal</h2></div>
+    <hr style={{width:"95%",margin:"auto"}}></hr>
+<div style={{textAlign:"left",width:"1400px",paddingLeft:"20px",marginBottom:"50px"}}>
+<h5>1. Rat in a Maze</h5>
+      <p>
+        Given a maze represented by a 2D grid, find a path for a rat to reach the destination from the starting position. The rat can only move in four directions (up, down, left, right) and cannot move through walls.
+      </p>
+
+      <h5>2. Number of Islands</h5>
+      <p>
+        Given a 2D grid where '1' represents land and '0' represents water, find the number of islands in the grid. An island is formed by connecting adjacent land cells horizontally or vertically.
+      </p>
+
+      <h5>3. Word Search</h5>
+      <p>
+        Given a 2D grid of characters and a word, determine if the word exists in the grid. The word can be constructed from adjacent cells (horizontally or vertically) in the grid.
+      </p>
+
+      <h5>4. Flood Fill</h5>
+      <p>
+        Given a 2D grid and a starting position, perform a flood fill operation to fill a specific region of the grid with a new color. The flood fill algorithm colors adjacent cells with the same color.
+      </p>
+      <div style={{diaplay:"flex"}}>5. <a href="https://leetcode.com/problems/shortest-bridge/description/"> <h5>Shortest Bridge</h5></a></div>
+      <div>6. https://www.geeksforgeeks.org/breadth-first-traversal-bfs-on-a-2d-array/</div>
+      <div>7. https://www.geeksforgeeks.org/depth-first-traversal-dfs-on-a-2d-array/</div>
+</div>
+    </div>
+    </div>
+    );
 }
 
 function sleep(ms) {

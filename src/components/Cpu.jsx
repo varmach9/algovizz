@@ -897,9 +897,9 @@ const Cpu = () => {
         setresult(resultarr)
     }
   return (
-    <div>
+    <div className=''>
         <div>Cpu Scheduling</div>
-        <div style={{display:"flex",justifyContent:"left"}}>
+        <div style={{display:"flex",justifyContent:"left",marginLeft:"50px"}}>
         <div id="sidebar" style={{display:"block"}}>
             <div style={{marginTop:"20px",marginBottom:"20px",textAlign:"center",fontSize:"20px"}}>Select Scheduling Algorithm</div>
             <div style={{display:"flex",justifyContent:"left",width:"600px"}}>
@@ -923,22 +923,22 @@ const Cpu = () => {
                 </div>
             </div>
         </div>
-        <div id="processBlock" style={{ paddingRight:"30px"}} >
+        <div id="processBlock" style={{ marginLeft:"50px"}} >
             <div style={{display:"flex",justifyContent:"right"}}>
-                <div style={{width:"200px", border:"1px solid", textAlign:"center"}}>Process Id</div>
-                <div style={{width:"200px", border:"1px solid", textAlign:"center"}}>Burst Time</div>
-                <div style={{width:"200px", border:"1px solid", textAlign:"center"}}>Arrival Time</div>
+                <div style={{width:"180px", border:"1px solid", textAlign:"center"}}>Process Id</div>
+                <div style={{width:"180px", border:"1px solid", textAlign:"center"}}>Burst Time</div>
+                <div style={{width:"180px", border:"1px solid", textAlign:"center"}}>Arrival Time</div>
                 <div style={{width:"180px", border:"1px solid", textAlign:"center"}}>Priority</div>
-                <div style={{width:"21.5px", textAlign:"center"}}></div>
+                <div style={{width:"22px", textAlign:"center"}}></div>
             </div>
             <div>
                 {pro.map((k,v)=>{
                     return <div style={{display:"flex",justifyContent:"right"}}>
-                    <div style={{width:"200px", border:"1px solid", textAlign:"center"}}>P-{k[0]}</div>
-                    <div style={{width:"200px", border:"1px solid", textAlign:"center"}}>{k[1]}</div>
-                    <div style={{width:"200px", border:"1px solid", textAlign:"center"}}>{k[2]}</div>
+                    <div style={{width:"180px", border:"1px solid", textAlign:"center"}}>P-{k[0]}</div>
+                    <div style={{width:"180px", border:"1px solid", textAlign:"center"}}>{k[1]}</div>
+                    <div style={{width:"180px", border:"1px solid", textAlign:"center"}}>{k[2]}</div>
                     <div style={{width:"180px", border:"1px solid", textAlign:"center"}}>{k[3]}</div>
-                    <div style={{width:"20px", border:"1px solid", textAlign:"center"}} onClick={()=>{
+                    <div style={{width:"22px", border:"1px solid", textAlign:"center"}} onClick={()=>{
                         if(running){return}
                         let mat=[];
                         for(let i=0;i<pro.length;i++){
@@ -951,7 +951,7 @@ const Cpu = () => {
                 </div>
                 })}
             </div>
-            <div style={{textAlign:"right"}}>
+            <div style={{justifyContent:"right"}}>
             <form onSubmit={(event)=>{
                 if(running){return}
                 let mat=[]
@@ -963,13 +963,13 @@ const Cpu = () => {
                 event.preventDefault()
             }}>
                   <label>
-                    Add Process:
-                    <input type="integer"  value={a} onChange={(e)=>{seta(Number(e.target.value))}} style={{width:"195px"}}/>
-                    <input type="integer"  value={b} onChange={(e)=>{setb(Number(e.target.value))}} style={{width:"195px"}}/>
-                    <input type="integer"  value={c} onChange={(e)=>{setc(Number(e.target.value))}} style={{width:"195px"}}/>
-                    <input type="integer"  value={d} onChange={(e)=>{setd(Number(e.target.value))}} style={{width:"175px"}}/>
+                    Add:
+                    <input type="integer"  value={a} onChange={(e)=>{seta(Number(e.target.value))}} style={{width:"165px"}}/>
+                    <input type="integer"  value={b} onChange={(e)=>{setb(Number(e.target.value))}} style={{width:"165px"}}/>
+                    <input type="integer"  value={c} onChange={(e)=>{setc(Number(e.target.value))}} style={{width:"165px"}}/>
+                    <input type="integer"  value={d} onChange={(e)=>{setd(Number(e.target.value))}} style={{width:"165px"}}/>
                   </label>
-                  <input type="submit" value="+" style={{width:"20px"}}/>
+                  <input type="submit" value="+" style={{width:"30px"}}/>
                 </form>
             </div>
         </div>
@@ -985,11 +985,11 @@ const Cpu = () => {
                 </form>
     </div>
         <div style={{display:"flex",marginTop:"30px"}}>
-        <div id="ready-queue" style={{width:"900px",marginLeft:"100px"}}>
+        <div id="ready-queue" style={{width:"400px",marginLeft:"100px"}}>
             <div>Ready-Queue</div>
             <div style={{display:"flex",justifyContent:"left"}}>
                         <div style={{width:"60px",textAlign:"center",paddingRight:"10px"}}>P</div>
-                        <div className='progress'  style={{width:"206px", textAlign:"center"}}>
+                        <div className='progress'  style={{width:"206px", display:"flex",justifyContent:"center",height:"25px"}}>
                             % completed
                         </div>
                     
@@ -998,7 +998,7 @@ const Cpu = () => {
             {q.map((k,v)=>{
                         return <div style={{display:"flex",justifyContent:"left",marginBottom:"2px",}}>
                         <div style={{width:"60px",textAlign:"center",paddingRight:"10px"}}>P-{pro[k][0]}</div>
-                        <div className='progress'  style={{width:"200px", border:"1px solid", textAlign:"center",backgroundColor: "grey"}}>
+                        <div className='progress'  style={{width:"200px", border:"1px solid", textAlign:"center",backgroundColor: "grey",height:"25px"}}>
                             {}
                             <div id={`${k}`} style={{backgroundColor:"green",width:`${(100*pro[k][7]/pro[k][1])}%`,position:"",height:"100%"}}></div>
                         </div>
@@ -1007,12 +1007,12 @@ const Cpu = () => {
                     })}
             </div>
         </div>
-        <div style={{width:"500px",textAlign:"center",marginLeft:"150px",marginRight:"150px"}}>
+        <div style={{width:"400px",textAlign:"center",marginRight:"150px"}}>
             <div> CPU </div>
             <div id="elementsinq" style={{marginTop:"10px"}}>
-             <div style={{display:"flex",justifyContent:"left",marginBottom:"2px",border:"solid",width:"200px"}}>
+             <div style={{display:"flex",justifyContent:"left",marginBottom:"2px",border:"solid",width:"250px"}}>
                         <div style={{width:"60px",textAlign:"center",paddingRight:"10px"}} id="cpu-pro-name">P</div>
-                        <div className='progress'  style={{width:"200px", border:"1px solid", textAlign:"center",backgroundColor: "grey"}}>
+                        <div className='progress'  style={{width:"250px", border:"1px solid", textAlign:"center",backgroundColor: "grey",height:"25px"}}>
                             <div id={`cpu`} style={{backgroundColor:"green",width:`0%`,height:"100%"}}></div>
                         </div>
                 </div>
