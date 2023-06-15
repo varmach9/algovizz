@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import "./styles.css"
+import YoutubeEmbed from './utils/Youtube'
 
 const Cpu = () => {
     // id,burst,Arrival,priority,wt,tat,ct,completed time
@@ -897,50 +898,53 @@ const Cpu = () => {
         setresult(resultarr)
     }
   return (
-    <div className=''>
-        <div>Cpu Scheduling</div>
+    <div className='' style={{marginLeft:"0px"}}>
+      <div style={{display:"flex",justifyContent:"center",width:"1500px",margin:"10px"}}><h1 style={{fontWeight:"bolder",color:"orange", textShadow: "0 0 3px blue",border:"solid",paddingLeft:"5px",paddingRight:"5px"}}>CPU SCHEDULING</h1></div>
         <div style={{display:"flex",justifyContent:"left",marginLeft:"50px"}}>
         <div id="sidebar" style={{display:"block"}}>
             <div style={{marginTop:"20px",marginBottom:"20px",textAlign:"center",fontSize:"20px"}}>Select Scheduling Algorithm</div>
             <div style={{display:"flex",justifyContent:"left",width:"600px"}}>
                 <div>
-                    <div style={{width:"200px",textAlign:"center"}}>Preemptive</div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button onClick={rr}>Round-Robin</button></div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button onClick={pb}>RR Priority (Multi ready queue)</button></div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button onClick={srjf}>Shotest Remaining Job First</button></div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button onClick={lrjf}>Longest Remaining Job First</button></div>
+                    <div style={{width:"250px",textAlign:"center"}}>Preemptive</div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button type="button" class="btn btn-primary btn-sm" onClick={rr}>Round-Robin Scheduling</button></div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button type="button" class="btn btn-primary btn-sm" onClick={pb}>RR Priority (Multi ready queue)</button></div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button type="button" class="btn btn-primary btn-sm" onClick={srjf}>Shotest Remaining Job First</button></div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button type="button" class="btn btn-primary btn-sm" onClick={lrjf}>Longest Remaining Job First</button></div>
                 </div>
                 <div>  
                     <div style={{width:"200px",textAlign:"center"}}>Preemptive(mixed)</div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button onClick={rrsjf}>RR-SJF</button></div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button onClick={rrljf}>RR-LJF</button></div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button type="button" class="btn btn-primary btn-sm" onClick={rrsjf}>RR-SJF</button></div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button type="button" class="btn btn-primary btn-sm" onClick={rrljf}>RR-LJF</button></div>
                 </div>
                 <div>
                     <div style={{width:"200px",textAlign:"center"}}>Non-Preemptive</div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button onClick={fcfs}>First come First served</button></div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button onClick={sjf}>Shortest Job First</button></div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button onClick={ljf}>Longest Job First</button></div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button type="button" class="btn btn-primary btn-sm" onClick={fcfs}>First come First served</button></div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button type="button" class="btn btn-primary btn-sm" onClick={sjf}>Shortest Job First</button></div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button type="button" class="btn btn-primary btn-sm" onClick={ljf}>Longest Job First</button></div>
                 </div>
             </div>
         </div>
         <div id="processBlock" style={{ marginLeft:"50px"}} >
             <div style={{display:"flex",justifyContent:"right"}}>
-                <div style={{width:"180px", border:"1px solid", textAlign:"center"}}>Process Id</div>
-                <div style={{width:"180px", border:"1px solid", textAlign:"center"}}>Burst Time</div>
-                <div style={{width:"180px", border:"1px solid", textAlign:"center"}}>Arrival Time</div>
-                <div style={{width:"180px", border:"1px solid", textAlign:"center"}}>Priority</div>
+                <div style={{width:"180px", border:"1px solid", textAlign:"center",backgroundColor:"orange"}}>Process Id</div>
+                <div style={{width:"180px", border:"1px solid", textAlign:"center",backgroundColor:"orange"}}>Burst Time</div>
+                <div style={{width:"180px", border:"1px solid", textAlign:"center",backgroundColor:"orange"}}>Arrival Time</div>
+                <div style={{width:"180px", border:"1px solid", textAlign:"center",backgroundColor:"orange"}}>Priority</div>
                 <div style={{width:"22px", textAlign:"center"}}></div>
             </div>
             <div>
                 {pro.map((k,v)=>{
-                    return <div style={{display:"flex",justifyContent:"right"}}>
+                    return <div style={{display:"flex",justifyContent:"right"}} id={`p-${v}`}>
                     <div style={{width:"180px", border:"1px solid", textAlign:"center"}}>P-{k[0]}</div>
                     <div style={{width:"180px", border:"1px solid", textAlign:"center"}}>{k[1]}</div>
                     <div style={{width:"180px", border:"1px solid", textAlign:"center"}}>{k[2]}</div>
                     <div style={{width:"180px", border:"1px solid", textAlign:"center"}}>{k[3]}</div>
-                    <div style={{width:"22px", border:"1px solid", textAlign:"center"}} onClick={()=>{
+                    <div style={{width:"22px", border:"1px solid", textAlign:"center"}} onClick={async()=>{
                         if(running){return}
                         let mat=[];
+                        document.getElementById(`p-${v}`).style.backgroundColor="red"
+                        await sleep(500)
+                        document.getElementById(`p-${v}`).style.backgroundColor=""
                         for(let i=0;i<pro.length;i++){
                             if (i!==v){mat.push(pro[i])}
                         }
@@ -969,25 +973,32 @@ const Cpu = () => {
                     <input type="integer"  value={c} onChange={(e)=>{setc(Number(e.target.value))}} style={{width:"165px"}}/>
                     <input type="integer"  value={d} onChange={(e)=>{setd(Number(e.target.value))}} style={{width:"165px"}}/>
                   </label>
-                  <input type="submit" value="+" style={{width:"30px"}}/>
+                  <input type="submit" value="+" style={{width:"30px",backgroundColor:"green",borderRadius:"20%",fontWeight:"bolder"}}/>
                 </form>
             </div>
         </div>
     </div>
-    <div style={{display:"flex"}}>
-    <div style={{marginLeft:"200px",display:"flex"}}>Time now = <div style={{marginLeft:"20px",marginRight:"2px",padding:"4px",display:"flex",border:"solid 2px"}}>{time} sec</div> </div>
+    <div style={{display:"flex",marginTop:"50px"}}>
+    <div style={{marginLeft:"150px",display:"flex"}}><div style={{width:"110px",marginTop:"35px", fontWeight:"bold"}}>Elapsed Time : </div>
+    <div style={{width:"150px",height:"100px", backgroundImage:"url(watch.png)",backgroundSize:"cover",marginLeft:"10px"}}>
+    <div style={{postion:"absolute",width:"100px",height:"40px",marginTop:"30px",marginLeft:"20px",marginRight:"2px",padding:"0px",display:"flex",fontFamily:"Orbitron"}}><h3 style={{paddingLeft:'20px',paddingTop:"10px"}}>{time} sec</h3></div> 
+    </div>
+    </div>
     <div style={{marginLeft:"100px",display:"flex",marginRight:"100px"}} id="processState"> State : {!running?"Process not running":"Process Running"} </div>
             <form onSubmit={(event)=>{event.preventDefault()}}>
                   <label>
                     Quantum:
-                    <input type="integer"  value={quantum} onChange={(e)=>{setquantum(Number(e.target.value))}} style={{width:"40px", margin:"10px"}}/>
+                    <input type="integer"  value={quantum} onChange={(e)=>{setquantum(Number(e.target.value))}} style={{width:"40px"}}/>
                   </label>
                 </form>
+                
     </div>
-        <div style={{display:"flex",marginTop:"30px"}}>
-        <div id="ready-queue" style={{width:"400px",marginLeft:"100px"}}>
-            <div>Ready-Queue</div>
-            <div style={{display:"flex",justifyContent:"left"}}>
+    <div style={{width:"170px",marginLeft:"100px"}}>Ready- Queue (in ram)</div>
+
+        <div style={{display:"flex",marginTop:"30px",marginLeft:"100px"}}>
+        <div id="ready-queue" style={{width:"400px",height:"320px",backgroundImage:"url(ram.png)",backgroundSize:"cover"}}>
+            
+            <div style={{display:"flex",justifyContent:"left",paddingLeft:"65px",paddingTop:"35px"}}>
                         <div style={{width:"60px",textAlign:"center",paddingRight:"10px"}}>P</div>
                         <div className='progress'  style={{width:"206px", display:"flex",justifyContent:"center",height:"25px"}}>
                             % completed
@@ -996,9 +1007,9 @@ const Cpu = () => {
                     </div>
             <div id="elementsinq" style={{marginTop:"10px"}}>
             {q.map((k,v)=>{
-                        return <div style={{display:"flex",justifyContent:"left",marginBottom:"2px",}}>
+                        return <div style={{display:"flex",justifyContent:"left",marginBottom:"0px",marginLeft:"65px"}}>
                         <div style={{width:"60px",textAlign:"center",paddingRight:"10px"}}>P-{pro[k][0]}</div>
-                        <div className='progress'  style={{width:"200px", border:"1px solid", textAlign:"center",backgroundColor: "grey",height:"25px"}}>
+                        <div className='progress'  style={{width:"200px", border:"1px solid", textAlign:"center",backgroundColor: "lightgrey",height:"20px"}}>
                             {}
                             <div id={`${k}`} style={{backgroundColor:"green",width:`${(100*pro[k][7]/pro[k][1])}%`,position:"",height:"100%"}}></div>
                         </div>
@@ -1007,15 +1018,18 @@ const Cpu = () => {
                     })}
             </div>
         </div>
-        <div style={{width:"400px",textAlign:"center",marginRight:"150px"}}>
+        <div style={{width:"250px",textAlign:"center",marginLeft:"100px",marginRight:"100px"}}>
             <div> CPU </div>
             <div id="elementsinq" style={{marginTop:"10px"}}>
              <div style={{display:"flex",justifyContent:"left",marginBottom:"2px",border:"solid",width:"250px"}}>
                         <div style={{width:"60px",textAlign:"center",paddingRight:"10px"}} id="cpu-pro-name">P</div>
-                        <div className='progress'  style={{width:"250px", border:"1px solid", textAlign:"center",backgroundColor: "grey",height:"25px"}}>
+                        <div className='progress'  style={{width:"250px", border:"1px solid", textAlign:"center",backgroundColor: "lightgrey",height:"25px"}}>
                             <div id={`cpu`} style={{backgroundColor:"green",width:`0%`,height:"100%"}}></div>
                         </div>
                 </div>
+            </div>
+            <div>
+                <img src={(running===1 && document.getElementById("cpu-pro-name").innerHTML!=="P")?"cpu.gif":"cpu.png"} alt="" width="200px"></img>
             </div>
         </div>
         <div style={{textAlign:"right"}}>
@@ -1037,15 +1051,15 @@ const Cpu = () => {
             </div>
         </div>
         </div>
-        <div style={{margin:"50px"}}>
-            <div>Finish Line</div>
+        <div style={{margin:"100px"}}>
+            <div>Process Run History:</div>
             <div style={{display:"flex", width:"1350px", flexDirection: "row",flexWrap: "wrap"}}>
                 {
                     result.map((value,key)=>{
                         let col="red";
                         let pallete=["lightblue","pink","lightgreen","orange","violet",
                                     "red","blue","green","brown","white"];
-                        if(value==="NA"){col="grey"}
+                        if(value==="NA"){col="lightgrey"}
                         else{
                             col=pallete[(value[0]==="P"?Number(value.slice(2,value.length)):pro[value][0])%10]
                         }
@@ -1055,6 +1069,25 @@ const Cpu = () => {
                     })
                 }
             </div>
+            {(result.length===0)?<div></div>:<div>(block represents 1 sec )</div>}
+        </div>
+        <div className='yt-section' style={{paddingLeft:"50px"}}>
+        <div style={{display:"flex",marginTop:"30px",marginLeft:"50px",color:"orangered"}}><h2>Learn More </h2></div>
+    <hr style={{width:"95%",margin:"auto"}}></hr>
+    <div className='' style={{display: "flex",marginTop:"30px",color:"green",textAlign:"center"}}>
+        
+   <div className="" style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="MZdVAVMgNpA" title="FCFS" /></div>
+   <div className="" style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="VCIVXPoiLpU" title="SJF" /></div>
+   <div className="" style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="xL3rlxiPc-Q" title="LJF"/></div>
+   <div className="" style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="TxjIlNYRZ5M" title="Round Robin"/></div> 
+    </div>
+    <div className='' style={{display: "flex",marginTop:"30px",color:"green",textAlign:"center"}}>
+        
+   <div className="" style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="rsDGfFxSgiY" title="Priority Based" /></div>
+   <div className="" style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="n7Owxwfr6Ko" title="TAT and WT" /></div>
+   <div className="" style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="0T5PlFVA9_k" title="I/O breaks" /></div>
+   <div className="" style={{marginLeft:"50px",width:"300px"}}></div>
+    </div>
         </div>
     </div>
   )

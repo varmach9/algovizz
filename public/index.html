@@ -12,10 +12,30 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Algoviz</title>
-    
+    <script>
+      /* Storing user's device details in a variable*/
+      let details = navigator.userAgent;
+      
+      /* Creating a regular expression
+      containing some mobile devices keywords
+      to search it in details string*/
+      let regexp = /android|iphone|kindle|ipad/i;
+      
+      /* Using test() method to search regexp in details
+      it returns boolean value*/
+      let isMobileDevice = regexp.test(details);
+      
+      if (isMobileDevice) {
+         alert("This website has been specifically tailored for laptop screens. While you're currently accessing it on a mobile or iPad screen, we recommend switching to a laptop for an optimal browsing experience. The website's layout and features have been optimized to provide a seamless and enhanced user experience on laptop screens.");
+         alert("Final warning: There may be some misalignment of components in the user interface")
+        } 
+   </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <script>
+      
+    </script>
   </body>
 </html>

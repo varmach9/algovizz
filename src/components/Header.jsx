@@ -8,6 +8,7 @@ const Header = () => {
       <a className="navbar-brand" href="/">
         <img src="start.jpg" alt="" width="40px"></img>
       </a>
+      <div><h5>ALGOVIZ</h5></div>
       <div style={{width:"80%",textAlign:"center"}}></div>
       <div>
         <ul className="navbar-nav ml-auto" style={{}}>

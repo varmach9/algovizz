@@ -6,6 +6,7 @@ const Paths = () => {
   const [running,setrunning]=useState(0)
   const[start,setstart]=useState(-1)
   const[end,setend]=useState(-1)
+  const[speed,setspeed]=useState(100)
   const setwall=()=>{
     for(let i=0;i<40;i++){
       let k=Math.floor(Math.random()*20);
@@ -22,10 +23,10 @@ const Paths = () => {
     setend(-1)
     setmode(1)
     document.getElementById("b1").style.backgroundColor="red"
-    document.getElementById("b2").style.backgroundColor="white"
-    document.getElementById("b3").style.backgroundColor="white"
-    document.getElementById("b4").style.backgroundColor="white"
-    document.getElementById("b5").style.backgroundColor="white"
+    document.getElementById("b2").style.backgroundColor=""
+    document.getElementById("b3").style.backgroundColor=""
+    document.getElementById("b4").style.backgroundColor=""
+    document.getElementById("b5").style.backgroundColor=""
     for(let i=0;i<20;i++){
       for(let j=0;j<30;j++){
         document.getElementById(`${100*i+j}`).innerHTML=""
@@ -50,8 +51,8 @@ const Paths = () => {
 
   // algorithms
   const bfs=async()=>{
-    if(running){return}
-    document.getElementById("b4").style.backgroundColor="red"
+    if(running===1 || start===-1|| end===-1){return}
+    document.getElementById("b4").style.backgroundColor="darkorange"
     document.getElementById("b5").style.backgroundColor=""
     setrunning(1)
     let visited=[start]
@@ -70,7 +71,7 @@ const Paths = () => {
         if(isavail(e-1) && ! ispresent(visited,e-1)){newarr.push(e-1);visited.push(e-1);document.getElementById(e-1).style.backgroundColor="lightblue"          ; parent[e-1]=e;if(e-1===end){found=1}}
         if(isavail(e+1) && ! ispresent(visited,e+1)){newarr.push(e+1);visited.push(e+1);document.getElementById(e+1).style.backgroundColor="lightblue"          ; parent[e+1]=e;if(e+1===end){found=1}}        
       };
-      await sleep(200)
+      await sleep(speed)
       if (found===1){
         let now=end;
         let path=[]
@@ -92,10 +93,10 @@ const Paths = () => {
     document.getElementById("b4").style.backgroundColor=""
     setrunning(0)
   }
-  const dfs=async()=>{
-    if(running){return}
+  const dfs=async()=>{    
+    if(running===1 || start===-1|| end===-1){return}
     document.getElementById("b4").style.backgroundColor=""
-    document.getElementById("b5").style.backgroundColor="red"
+    document.getElementById("b5").style.backgroundColor="darkorange"
     setrunning(1)
     let visited=[start]
     let parent={} 
@@ -112,7 +113,7 @@ const Paths = () => {
       if(e===end){found=1}
       document.getElementById(e).style.backgroundColor="blue"
       // console.log(e,arr)
-      await sleep(50)
+      await sleep(speed)
       if (found===1){
         let now=end;
         let path=[]
@@ -136,33 +137,42 @@ const Paths = () => {
     
     <div style={{display:"flex",width:"1500px"}}>
       <div style={{ width:"600px",paddingLeft:"50px"}}>
-        <div>Controls</div>
-        <div style={{margin:"10px"}}>
-          <button  style={{backgroundColor:"red",marginRight:"10px"}}onClick={()=>{setmode(1)
+        <div style={{color:"green"}}><h4>Controls:</h4></div>
+        <div style={{margin:"10px",display:"flex"}}>
+          <div style={{marginRight:"20px"}}>Select Marker: </div>
+          <button type="button" class="btn btn-primary btn-sm" style={{backgroundColor:"red",marginRight:"10px"}}onClick={()=>{setmode(1)
               document.getElementById("b1").style.backgroundColor="red"
               document.getElementById("b2").style.backgroundColor=""
               document.getElementById("b3").style.backgroundColor=""
-          }} id="b1">startnode</button>
-          <button style={{marginRight:"10px"}} onClick={()=>{setmode(2)
+          }} id="b1">Startnode</button>
+          <button type="button" class="btn btn-primary btn-sm" style={{marginRight:"10px"}} onClick={()=>{setmode(2)
               document.getElementById("b2").style.backgroundColor="red"
               document.getElementById("b1").style.backgroundColor=""
               document.getElementById("b3").style.backgroundColor=""
               console.log(mode)
-          }} id="b2">endnode</button>
-          <button style={{marginRight:"10px"}} onClick={()=>{setmode(3)
+          }} id="b2">Endnode</button>
+          <button type="button" class="btn btn-primary btn-sm" style={{marginRight:"10px",width:"70px"}} onClick={()=>{setmode(3)
               document.getElementById("b3").style.backgroundColor="red"
               document.getElementById("b2").style.backgroundColor=""
               document.getElementById("b1").style.backgroundColor=""
-          }} id="b3">wall</button>
+          }} id="b3">Wall</button>
         </div>
-        <div style={{margin:"10px"}}>
-        <button onClick={setwall} style={{marginRight:"10px"}}>Random-wall</button>
-        <button onClick={clearb}>clear board</button>
+        <div style={{marginTop:"10px",marginLeft:"140px"}}>
+        <button type="button" class="btn btn-primary btn-sm" onClick={setwall} style={{marginRight:"10px"}}>Random-wall</button>
+        <button type="button" class="btn btn-primary btn-sm" onClick={clearb}>clear board</button>
         </div>
+        
+        <div style={{marginTop:"5px",marginBottom:"10px",marginLeft:"10px"}}>Adjust Speed:</div>
+            <div style={{marginLeft:"20px"}}>
+                <button type="button" className={classNames("btn", (speed!==200)?"btn-light":"btn-info", "btn-sm", "border",(speed===200)?"border-link":"",(speed===200)?"border-5":"")} style={{marginLeft:"10px"}} onClick={()=>{setspeed(200)}}>Slow</button>
+                <button type="button" className={classNames("btn", (speed!==100)?"btn-light": "btn-info", "btn-sm", "border",(speed===100)?"border-link": "",(speed===100)?"border-5":"")} style={{marginLeft:"10px" }} onClick={()=>{setspeed(100)}}>Medium</button>
+                <button type="button" className={classNames("btn", (speed!==40)?"btn-light": "btn-info", "btn-sm", "border",(speed===40)?"border-link": "",(speed===40)?"border-5":"")} style={{marginLeft:"10px" }} onClick={()=>{setspeed(40)}}>Fast</button>
+            </div>
+
         <div style={{margin:"10px"}}>
           <div>Select Algorithms to Visualize:</div>
-        <button onClick={bfs}  id='b4' style={{marginRight:"10px"}}>BFS(or)Djkstra</button>
-        <button onClick={dfs}  id='b5'>DFS</button>
+        <button type="button" class="btn btn-warning btn-sm" onClick={bfs}  id='b4' style={{marginLeft:"10px",marginBottom:"20px",marginTop:"10px"}}>BFS(or)Djkstra</button>
+        <button type="button" class="btn btn-warning btn-sm" onClick={dfs}  id='b5' style={{marginLeft:"10px",marginBottom:"20px",marginTop:"10px"}}>DFS</button>
         </div>
         <div style={{border:"solid",marginRight:"20px",padding:"10px",color:"green",backgroundColor:""}}>
         <div className="grid-traversal">
@@ -232,7 +242,7 @@ const Paths = () => {
         </div>
     </div>
     <div className="yt-section" style={{paddingLeft:"50px"}}>
-    <div style={{display:"flex",marginTop:"30px",color:"orangered"}}><h2>Learn More </h2></div>
+    <div style={{display:"flex",marginTop:"30px",color:"orangered",marginLeft:"50px"}}><h2>Learn More </h2></div>
     <hr style={{width:"95%",margin:"auto"}}></hr>
     <div className='' style={{display: "flex",marginTop:"30px",color:"green",textAlign:"center"}}>
         
@@ -246,28 +256,38 @@ const Paths = () => {
     <div style={{display:"flex",marginTop:"30px",marginLeft:"10px",color:"orangered"}}><h2>Practice Grid Trversal</h2></div>
     <hr style={{width:"95%",margin:"auto"}}></hr>
 <div style={{textAlign:"left",width:"1400px",paddingLeft:"20px",marginBottom:"50px"}}>
-<h5>1. Rat in a Maze</h5>
-      <p>
-        Given a maze represented by a 2D grid, find a path for a rat to reach the destination from the starting position. The rat can only move in four directions (up, down, left, right) and cannot move through walls.
+
+      <h5>1. <a href="https://www.geeksforgeeks.org/rat-in-a-maze/" style={{textDecoration:"none"}}> Rat in a Maze</a></h5>
+      <p style={{marginLeft:"20px"}}>
+        Given a maze represented by a 2D grid, find a path to reach the destination from the starting position. The rat can only move in four directions ( ↑ ↓ → ← ) and cannot move through walls.
       </p>
 
-      <h5>2. Number of Islands</h5>
-      <p>
+      <h5>2. <a href="https://www.geeksforgeeks.org/find-the-number-of-islands-using-dfs/" style={{textDecoration:"none"}}> Number of Islands</a></h5>
+      <p style={{marginLeft:"20px"}}>
         Given a 2D grid where '1' represents land and '0' represents water, find the number of islands in the grid. An island is formed by connecting adjacent land cells horizontally or vertically.
       </p>
 
-      <h5>3. Word Search</h5>
-      <p>
+      <h5>3. <a href="https://www.geeksforgeeks.org/search-a-word-in-a-2d-grid-of-characters/" style={{textDecoration:"none"}}> Word Search</a></h5>
+      <p style={{marginLeft:"20px"}}>
         Given a 2D grid of characters and a word, determine if the word exists in the grid. The word can be constructed from adjacent cells (horizontally or vertically) in the grid.
       </p>
 
-      <h5>4. Flood Fill</h5>
-      <p>
+      <h5>4. <a href="https://www.geeksforgeeks.org/flood-fill-algorithm-implement-fill-paint/" style={{textDecoration:"none"}}> Flood Fill</a></h5>
+      <p style={{marginLeft:"20px"}}>
         Given a 2D grid and a starting position, perform a flood fill operation to fill a specific region of the grid with a new color. The flood fill algorithm colors adjacent cells with the same color.
       </p>
-      <div style={{diaplay:"flex"}}>5. <a href="https://leetcode.com/problems/shortest-bridge/description/"> <h5>Shortest Bridge</h5></a></div>
-      <div>6. https://www.geeksforgeeks.org/breadth-first-traversal-bfs-on-a-2d-array/</div>
-      <div>7. https://www.geeksforgeeks.org/depth-first-traversal-dfs-on-a-2d-array/</div>
+      <h5>5. <a href="https://leetcode.com/problems/shortest-bridge/description/" style={{textDecoration:"none"}}> Shortest Bridge</a></h5>
+      <p style={{marginLeft:"20px"}}>
+        Given a 2D grid where '1' represents land and '0' represents water, find the number of islands in the grid. An island is formed by connecting adjacent land cells horizontally or vertically.
+      </p>
+      <h5>6. <a href="https://www.geeksforgeeks.org/breadth-first-traversal-bfs-on-a-2d-array/" style={{textDecoration:"none"}}> BFS in a Grid</a></h5>
+      <p style={{marginLeft:"20px"}}>
+      Given a matrix of size M x N consisting of integers, the task is to print the matrix elements using Breadth-First Search traversal.
+      </p>
+      <h5>7. <a href="https://www.geeksforgeeks.org/depth-first-traversal-dfs-on-a-2d-array/" style={{textDecoration:"none"}}> DFS in a Grid</a></h5>
+      <p style={{marginLeft:"20px"}}>
+      Given a matrix of size M x N consisting of integers, the task is to print the matrix elements using Depth-First Search traversal.
+      </p>
 </div>
     </div>
     </div>
@@ -276,6 +296,9 @@ const Paths = () => {
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
+}
+function classNames(...args) {
+  return args.filter(Boolean).join(' ')
 }
 
 export default Paths
