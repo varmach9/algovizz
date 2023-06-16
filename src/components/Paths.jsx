@@ -171,7 +171,7 @@ const Paths = () => {
 
         <div style={{margin:"10px"}}>
           <div>Select Algorithms to Visualize:</div>
-        <button type="button" class="btn btn-warning btn-sm" onClick={bfs}  id='b4' style={{marginLeft:"10px",marginBottom:"20px",marginTop:"10px"}}>BFS(or)Djkstra</button>
+        <button type="button" class="btn btn-warning btn-sm" onClick={bfs}  id='b4' style={{marginLeft:"10px",marginBottom:"20px",marginTop:"10px"}}>BFS(or)Dijkstra</button>
         <button type="button" class="btn btn-warning btn-sm" onClick={dfs}  id='b5' style={{marginLeft:"10px",marginBottom:"20px",marginTop:"10px"}}>DFS</button>
         </div>
         <div style={{border:"solid",marginRight:"20px",padding:"10px",color:"green",backgroundColor:""}}>

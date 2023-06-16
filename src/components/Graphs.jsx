@@ -5,7 +5,6 @@ const Graphs = () => {
   
   return (
     <div>
-    <div>Graphs</div>
       <Canvas/>
     </div>
   )

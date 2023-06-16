@@ -1,7 +1,9 @@
 import React,{useState} from 'react'
-
+import YoutubeEmbed from './utils/Youtube'
 const Sudoku = () => {
     const [ru,setru]=useState(0)
+    const [completed,setcompleted]=useState(0)
+    const [speed,setspeed]=useState(200)
     const row=[]
     const col=[]
     const box=[]
@@ -50,7 +52,7 @@ const Sudoku = () => {
                     col[j].push(mat[i][j])
                     box[b].push(mat[i][j])
                     document.getElementById(100*i+j).innerHTML=mat[i][j]
-                    document.getElementById(100*i+j).style.backgroundColor="purple"
+                    document.getElementById(100*i+j).style.backgroundColor="grey"
                 }
             }
         }
@@ -63,26 +65,28 @@ const Sudoku = () => {
             if (arr[i][3]===1){
                 document.getElementById(100*arr[i][0]+arr[i][1]).innerHTML=arr[i][2]
                 document.getElementById(100*arr[i][0]+arr[i][1]).style.backgroundColor="green"
-                await sleep(200)
+                await sleep(speed)
                 document.getElementById(100*arr[i][0]+arr[i][1]).style.backgroundColor="white" 
-                await sleep(200)
+                await sleep(speed)
             }else{
                 document.getElementById(100*arr[i][0]+arr[i][1]).style.backgroundColor="red" 
-                await sleep(200)
+                await sleep(speed)
                 document.getElementById(100*arr[i][0]+arr[i][1]).innerHTML=""
                 document.getElementById(100*arr[i][0]+arr[i][1]).style.backgroundColor="white" 
-                await sleep(200)
+                await sleep(speed)
             }
         }
+        setcompleted(1)
     }
     const solver=()=>{
         if(ru===1){alert(1);return}
+        setcompleted(0)
         setru(1)
         // console.log(row)
         const solve=(i,j)=>{
             if(i===9){return 1}
             if(j===9){return solve(i+1,0)}
-            if(document.getElementById(100*i+j).style.backgroundColor==="purple"){return solve(i,j+1)}
+            if(document.getElementById(100*i+j).style.backgroundColor==="grey"){return solve(i,j+1)}
             let b=3*(Math.floor(i/3))+Math.floor(j/3)
             for(let k=1;k<=9;k++){
                 if (!row[i].includes(k) && !col[j].includes(k) && !box[b].includes(k)){
@@ -107,22 +111,43 @@ const Sudoku = () => {
 
     
   return (
-    <div>
-        <div>N queen</div>
-        <div>
-            <button onClick={solver}>Backtrack solution</button>
-            <button onClick={randomize}>Fill starting grid</button>
+    <div style={{marginLeft:"50px"}}>
+        <div style={{display:"flex",justifyContent:"center",width:"1300px",margin:"10px"}}><h1 style={{fontWeight:"bolder",color:"blue", textShadow: "0 0 1px blue",paddingLeft:"235px",paddingRight:"5px"}}>Sudoku</h1></div>
+        <div style={{display:"flex", marginLeft:"20px"}}>
+        <div style={{width:"501px"}}>
+            <button class="btn btn-primary " style={{marginLeft:"30px"}} onClick={solver}>Backtrack solution</button>
+            <button class="btn btn-primary " style={{marginLeft:"30px"}} onClick={randomize}>Fill starting grid</button>
+
+            <div style={{marginTop:"15px",marginBottom:"10px",marginLeft:"40px"}}>Adjust Speed:</div>
+            <div style={{marginLeft:"40px"}}>
+                <button type="button" className={classNames("btn", (speed!==500)?"btn-light":"btn-info", "btn-sm", "border",(speed===500)?"border-link":"",(speed===500)?"border-5":"")} style={{marginLeft:"10px"}} onClick={()=>{setspeed(500)}}>Slow</button>
+                <button type="button" className={classNames("btn", (speed!==200)?"btn-light": "btn-info", "btn-sm", "border",(speed===200)?"border-link": "",(speed===200)?"border-5":"")} style={{marginLeft:"10px" }} onClick={()=>{setspeed(200)}}>Medium</button>
+                <button type="button" className={classNames("btn", (speed!==50)?"btn-light": "btn-info", "btn-sm", "border",(speed===50)?"border-link": "",(speed===50)?"border-5":"")} style={{marginLeft:"10px" }} onClick={()=>{setspeed(50)}}>Fast</button>
+            </div>
+
+<div style={{marginTop:"20px"}}>
+  <h3>Sudoku Problem: Backtracking Method</h3>
+  <ul>
+    <li>Start with an empty Sudoku grid consisting of a <code>9 x 9</code> board divided into <code>3 x 3</code> subgrids.</li>
+    <li>Fill in the given clues into the grid, ensuring that each clue follows the Sudoku rules.</li>
+    <li>Begin with the first empty cell and recursively try to place a valid number (from 1 to 9) into that cell.</li>
+    <li>Check if the number placement is valid by considering conflicts with numbers in the same row, column, and subgrid.</li>
+    <li>If a valid number is found, place it in the cell and move to the next empty cell.</li>
+    <li>If all cells are filled without conflicts, a valid solution is found. Otherwise, backtrack to the previous cell and try a different number until a solution is found or all possibilities are exhausted.</li>
+  </ul>
+</div>
+
         </div>
-        <div style={{justifyContent:"center",display:"flex"}}>
+        <div style={{justifyContent:"center",display:"flex",marginLeft:"100px"}}>
         <div>
         {Array.apply(0, Array(3)).map(function (x, i) {
-            return <div style={{display:"flex",border:"solid 1px",width:"468px"}}>
+            return <div style={{display:"flex",border:"solid 1px",width:"455px"}}>
             {Array.apply(0, Array(3)).map(function (x, j) {
             return <div style={{border:"solid 1px",width:"470px"}}>
                 {Array.apply(0, Array(3)).map(function (x, k) {
             return <div style={{display:"flex"}}>
             {Array.apply(0, Array(3)).map(function (x, l) {
-            return <div style={{border:"solid 0.5px",width:"50px",height:"40px",textAlign:"center",paddingTop:"10px"}} id={(3*i+k)*100+3*j+l}></div>
+            return <div style={{border:"solid 0.5px",width:"50px",height:"50px",textAlign:"center",paddingTop:"10px"}} id={(3*i+k)*100+3*j+l}></div>
         })}
             </div>
         })}
@@ -131,6 +156,32 @@ const Sudoku = () => {
             </div>
         })}
     </div>
+    </div>
+    <div style={{width:"400px"}}>
+        { (completed===1)?
+        <div>
+        <img src="celeb.gif" width="350px" alt=""></img>
+        </div>:<div></div>
+        }
+    </div>
+    </div>
+    <div style={{display:"flex",marginTop:"30px",marginLeft:"50px",color:"orangered"}}><h2>Learn More in Backtracking </h2></div>
+    <hr style={{width:"95%",margin:"auto"}}></hr>
+    <div className='' style={{display: "flex",marginTop:"30px",color:"green",textAlign:"center"}}>
+        
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="xFv_Hl4B83A" title="N-Queen" />  </div>
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="4BBB0mvvbGA" title="Rat in a Maze"/></div>
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="FWAIf_EVUKE" title="Sudoku Solver"/></div>
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="Nabbpl7y4Lo" title="Permutations"/>    </div>
+   </div>
+
+    <div>
+    <div style={{display:"flex",marginTop:"30px",marginLeft:"50px",color:"orangered"}}><h2>Practice Backtracking</h2></div>
+    <hr style={{width:"95%",margin:"auto"}}></hr>
+<div style={{textAlign:"left",width:"1450px",marginLeft:"30px",marginTop:"10px",marginBottom:"30px"}}>
+    <ul><li style={{marginTop:"10px"}}><strong>Easy:</strong><p></p><ol><li><a style={{textDecoration:"none"}} href="https://www.geeksforgeeks.org/backtracking-to-find-all-subsets/">Backtracking to find all subsets</a></li><li><a style={{textDecoration:"none"}} href="https://www.geeksforgeeks.org/check-given-string-sum-string/">Check if a given string is sum-string</a></li><li><a style={{textDecoration:"none"}} href="https://www.geeksforgeeks.org/count-possible-paths-two-vertices/">Count all possible paths between two vertices</a></li><li><a style={{textDecoration:"none"}} href="https://www.geeksforgeeks.org/find-distinct-subsets-given-set/">Find all distinct subsets of a given set</a></li><li><a style={{textDecoration:"none"}} href="https://www.geeksforgeeks.org/find-if-there-is-a-path-of-more-than-k-length-from-a-source/">Find if there is a path of more than k length from a source</a></li><li><a style={{textDecoration:"none"}} href="https://www.geeksforgeeks.org/find-paths-given-source-destination/">Print all paths from a given source to a destination</a></li><li><a style={{textDecoration:"none"}} href="https://www.geeksforgeeks.org/print-possible-strings-can-made-placing-spaces/">Print all possible strings that can be made by placing spaces</a></li></ol></li><li style={{marginTop:"10px"}}><strong>Medium:</strong><p></p><ol><li><a style={{textDecoration:"none"}} href="https://www.geeksforgeeks.org/tug-of-war/">Tug of War</a></li><li><a style={{textDecoration:"none"}} href="https://www.geeksforgeeks.org/8-queen-problem/">8 queen problem</a></li><li><a style={{textDecoration:"none"}} href="https://www.geeksforgeeks.org/combinational-sum/">Combinational Sum</a></li><li><a style={{textDecoration:"none"}} href="https://www.geeksforgeeks.org/warnsdorffs-algorithm-knights-tour-problem/">Warnsdorff’s algorithm for Knight’s tour problem</a></li><li><a style={{textDecoration:"none"}} href="https://www.geeksforgeeks.org/find-paths-from-corner-cell-to-middle-cell-in-maze/">Find paths from corner cell to middle cell in maze</a></li><li><a style={{textDecoration:"none"}} href="https://www.geeksforgeeks.org/find-maximum-number-possible-by-doing-at-most-k-swaps/">Find Maximum number possible by doing at-most K swaps</a></li><li><a style={{textDecoration:"none"}} href="https://www.geeksforgeeks.org/rat-in-a-maze-with-multiple-steps-jump-allowed/">Rat in a Maze with multiple steps or jump allowed</a></li><li><a style={{textDecoration:"none"}} href="https://www.geeksforgeeks.org/n-queen-in-on-space/">N Queen in O(n) space</a></li></ol></li><li style={{marginTop:"10px"}}><strong>Hard:</strong><p></p><ol><li><a style={{textDecoration:"none"}} href="https://www.geeksforgeeks.org/powet-set-lexicographic-order/">Power Set in Lexicographic order</a></li><li><a style={{textDecoration:"none"}} href="https://www.geeksforgeeks.org/word-break-problem-using-backtracking/">Word Break Problem using Backtracking</a></li><li><a style={{textDecoration:"none"}} href="https://www.geeksforgeeks.org/partition-set-k-subsets-equal-sum/">Partition of a set into K subsets with equal sum</a></li><li><a style={{textDecoration:"none"}} href="https://www.geeksforgeeks.org/longest-possible-route-in-a-matrix-with-hurdles/">Longest Possible Route in a Matrix with Hurdles</a></li><li><a style={{textDecoration:"none"}} href="https://www.geeksforgeeks.org/find-shortest-safe-route-in-a-path-with-landmines/">Find shortest safe route in a path with landmines</a></li><li><a style={{textDecoration:"none"}} href="https://www.geeksforgeeks.org/print-palindromic-partitions-string/">Print all palindromic partitions of a string</a></li><li><a style={{textDecoration:"none"}} href="https://www.geeksforgeeks.org/printing-solutions-n-queen-problem/">Printing all solutions in N-Queen Problem</a></li><li><a style={{textDecoration:"none"}} href="https://www.geeksforgeeks.org/print-longest-common-sub-sequences-lexicographical-order/">Print all longest common sub-sequences in lexicographical order</a></li></ol></li></ul>
+
+</div>
     </div>
     </div>
   )
@@ -138,6 +189,8 @@ const Sudoku = () => {
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms/5));
 }
-
+function classNames(...args) {
+    return args.filter(Boolean).join(' ')
+  }
 
 export default Sudoku

@@ -8,7 +8,9 @@ const Footer = () => {
   
       <div class="text-center" >
       Developed by <a href="https://www.linkedin.com/in/srinivasa-varma-chekuri-9130501b2/" style={{color:"lightblue",textDecoration:"none"}}> Chekuri Srinivasa Varma </a>
-    </div><div class="text-center" >
+    </div>
+    
+    <div class="text-center" >
       © 2023 Copyright 
     </div>
   </footer>

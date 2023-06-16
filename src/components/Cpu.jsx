@@ -25,18 +25,21 @@ const Cpu = () => {
     const [quantum,setquantum]=useState(2)
     const [running,setrunning]=useState(0)
     const [result,setresult]=useState([])
+    const[algo,setalgo]=useState(0)
+    const[speed,setspeed]=useState(100)
     const refresh=async()=>{
         let mat=[]
         for(let i=0;i<pro.length;i++){
             mat.push([pro[i][0],pro[i][1],pro[i][2],pro[i][3],0,0,0,0])
         }
         setpro(mat)
-        await sleep(500)
+        await sleep(5*speed)
     }
 
     const srjf=async()=>{
         if(running){return}
         setrunning(1)
+        setalgo(3)
         refresh()
         console.log("in srjf nonRR")
         let qarr=[]
@@ -45,7 +48,7 @@ const Cpu = () => {
         settime(times)
         for(let i=0;i<pro.length;i++){if(pro[i][2]===times ){qarr.push(i);proLeft--;console.log(`P-${pro[i][0]} arrived in ready queue at ${times} sec`)}}
         setq(qarr)
-        await sleep(500)
+        await sleep(5*speed)
         let percentpersec=1
         let timeleft=0
         let quantumleft=10000
@@ -59,7 +62,7 @@ const Cpu = () => {
                 qarr.sort(function(a,b){return pro[a][1]-pro[a][7]-pro[b][1]+pro[b][7]})
                 resultarr.push("NA")
                 setq(qarr)
-                await sleep(500)
+                await sleep(5*speed)
                 continue
             }
             // allocate a process in cpu 
@@ -71,7 +74,7 @@ const Cpu = () => {
             percentpersec=1/pro[qarr[0]][1];
             qarr=qarr.slice(1,qarr.length)
             setq(qarr)
-            await sleep(500)
+            await sleep(5*speed)
             // console.log("here",q,qarr);
 
             // complete a process in cpu 
@@ -88,7 +91,7 @@ const Cpu = () => {
                 if(pro[i][1]<timeleft){quantumleft=0}}}
                 qarr.sort(function(a,b){return pro[a][1]-pro[a][7]-pro[b][1]+pro[b][7]})
                 setq(qarr)
-                await sleep(500)
+                await sleep(5*speed)
             }
 
             // adding process back to ready queue if left
@@ -102,7 +105,7 @@ const Cpu = () => {
                 qarr.push(index);
                 qarr.sort(function(a,b){return pro[a][1]-pro[a][7]-pro[b][1]+pro[b][7]});
                 setq(qarr);
-                await sleep(500)
+                await sleep(5*speed)
             }
 
             // calculating tat and wt if process is completed
@@ -125,12 +128,14 @@ const Cpu = () => {
         console.log("srjf nonRR completed")
         document.getElementById("cpu").style.width="0%"
         setrunning(0)
+        setalgo(0)
         settime(0)
         setresult(resultarr)
     }
     const lrjf=async()=>{
         if(running){return}
         setrunning(1)
+        setalgo(4)
         refresh()
         console.log("in lrjf nonRR")
         let qarr=[]
@@ -139,7 +144,7 @@ const Cpu = () => {
         settime(times)
         for(let i=0;i<pro.length;i++){if(pro[i][2]===times ){qarr.push(i);proLeft--;console.log(`P-${pro[i][0]} arrived in ready queue at ${times} sec`)}}
         setq(qarr)
-        await sleep(500)
+        await sleep(5*speed)
         let percentpersec=1
         let timeleft=0
         let quantumleft=quantum
@@ -154,7 +159,7 @@ const Cpu = () => {
                 qarr.sort(function(a,b){return pro[b][1]-pro[b][7]-pro[a][1]+pro[a][7]})
                 resultarr.push("NA")
                 setq(qarr)
-                await sleep(500)
+                await sleep(5*speed)
                 continue
             }
             // allocate a process in cpu 
@@ -166,7 +171,7 @@ const Cpu = () => {
             percentpersec=1/pro[qarr[0]][1];
             qarr=qarr.slice(1,qarr.length)
             setq(qarr)
-            await sleep(500)
+            await sleep(5*speed)
             // console.log("here",q,qarr);
 
             // complete a process in cpu 
@@ -182,7 +187,7 @@ const Cpu = () => {
                 for(let i=0;i<pro.length;i++){if(pro[i][2]===times ){qarr.push(i);proLeft--;console.log(`P-${pro[i][0]} arrived in ready queue at ${times} sec`);if(pro[i][1]>timeleft){quantumleft=0}}}
                 qarr.sort(function(a,b){return pro[b][1]-pro[b][7]-pro[a][1]+pro[a][7]})
                 setq(qarr)
-                await sleep(500)
+                await sleep(5*speed)
             }
 
             // adding process back to ready queue if left
@@ -196,7 +201,7 @@ const Cpu = () => {
                 qarr.push(index);
                 qarr.sort(function(a,b){return pro[b][1]-pro[b][7]-pro[a][1]+pro[a][7]});
                 setq(qarr);
-                await sleep(500)
+                await sleep(5*speed)
             }
 
             // calculating tat and wt if process is completed
@@ -222,6 +227,7 @@ const Cpu = () => {
         console.log("lrjf nonRR completed")
         document.getElementById("cpu").style.width="0%"
         setrunning(0)
+        setalgo(4)
         settime(0)
         setresult(resultarr)
     }
@@ -229,6 +235,7 @@ const Cpu = () => {
     const rr=async()=>{
         if(running){return}
         setrunning(1)
+        setalgo(1)
         refresh()
         console.log("in rr")
         let qarr=[]
@@ -237,7 +244,7 @@ const Cpu = () => {
         settime(times)
         for(let i=0;i<pro.length;i++){if(pro[i][2]===times ){qarr.push(i);proLeft--;console.log(`P-${pro[i][0]} arrived in ready queue at ${times} sec`)}}
         setq(qarr)
-        await sleep(500)
+        await sleep(5*speed)
         let percentpersec=1
         let timeleft=0
         let quantumleft=quantum
@@ -250,7 +257,7 @@ const Cpu = () => {
                 for(let i=0;i<pro.length;i++){if(pro[i][2]===times ){qarr.push(i);proLeft--;}}
                 resultarr.push("NA")
                 setq(qarr)
-                await sleep(500)
+                await sleep(5*speed)
                 continue
             }
             // allocate a process in cpu 
@@ -262,7 +269,7 @@ const Cpu = () => {
             percentpersec=1/pro[qarr[0]][1];
             qarr=qarr.slice(1,qarr.length)
             setq(qarr)
-            await sleep(500)
+            await sleep(5*speed)
             // console.log("here",q,qarr);
 
             // complete a process in cpu 
@@ -278,7 +285,7 @@ const Cpu = () => {
                 settime(times)
                 for(let i=0;i<pro.length;i++){if(pro[i][2]===times ){qarr.push(i);proLeft--;console.log(`P-${pro[i][0]} arrived in ready queue at ${times} sec`)}}
                 setq(qarr)
-                await sleep(500)
+                await sleep(5*speed)
             }
 
             // adding process back to ready queue if left
@@ -312,6 +319,7 @@ const Cpu = () => {
         console.log("rr completed")
         document.getElementById("cpu").style.width="0%"
         setrunning(0)
+        setalgo(0)
         settime(0)
         setresult(resultarr)
     }
@@ -320,6 +328,7 @@ const Cpu = () => {
     const pb=async()=>{
         if(running){return}
         setrunning(1)
+        setalgo(2)
         refresh()
         console.log("in priority based")
         let qarr=[]
@@ -329,7 +338,7 @@ const Cpu = () => {
         for(let i=0;i<pro.length;i++){if(pro[i][2]===times ){qarr.push(i);proLeft--;console.log(`P-${pro[i][0]} arrived in ready queue at ${times} sec`)}}
         qarr.sort(function(a,b){return pro[a][3]-pro[b][3]})
         setq(qarr)
-        await sleep(500)
+        await sleep(5*speed)
         let percentpersec=1
         let timeleft=0
         let quantumleft=quantum
@@ -343,7 +352,7 @@ const Cpu = () => {
                 qarr.sort(function(a,b){return pro[a][3]-pro[b][3]})
                 resultarr.push("NA")
                 setq(qarr)
-                await sleep(500)
+                await sleep(5*speed)
                 continue
             }
             // allocate a process in cpu 
@@ -355,7 +364,7 @@ const Cpu = () => {
             percentpersec=1/pro[qarr[0]][1];
             qarr=qarr.slice(1,qarr.length)
             setq(qarr)
-            await sleep(500)
+            await sleep(5*speed)
             // console.log("here",q,qarr);
 
             // complete a process in cpu 
@@ -372,7 +381,7 @@ const Cpu = () => {
                 for(let i=0;i<pro.length;i++){if(pro[i][2]===times ){qarr.push(i);proLeft--;console.log(`P-${pro[i][0]} arrived in ready queue at ${times} sec`)}}
                 qarr.sort(function(a,b){return pro[a][3]-pro[b][3]})
                 setq(qarr)
-                await sleep(500)
+                await sleep(5*speed)
             }
 
             // adding process back to ready queue if left
@@ -407,6 +416,7 @@ const Cpu = () => {
         console.log("priority based completed")
         document.getElementById("cpu").style.width="0%"
         setrunning(0)
+        setalgo(0)
         settime(0)
         setresult(resultarr)
     }
@@ -414,6 +424,7 @@ const Cpu = () => {
     const rrsjf=async()=>{
         if(running){return}
         setrunning(1)
+        setalgo(5)
         refresh()
         console.log("in RR srjf")
         let qarr=[]
@@ -423,7 +434,7 @@ const Cpu = () => {
         for(let i=0;i<pro.length;i++){if(pro[i][2]===times ){qarr.push(i);proLeft--;console.log(`P-${pro[i][0]} arrived in ready queue at ${times} sec`)}}
         qarr.sort(function(a,b){return pro[a][1]-pro[a][7]-pro[b][1]+pro[b][7]})
         setq(qarr)
-        await sleep(500)
+        await sleep(5*speed)
         let percentpersec=1
         let timeleft=0
         let quantumleft=quantum
@@ -437,7 +448,7 @@ const Cpu = () => {
                 qarr.sort(function(a,b){return pro[a][1]-pro[a][7]-pro[b][1]+pro[b][7]})
                 resultarr.push("NA")
                 setq(qarr)
-                await sleep(500)
+                await sleep(5*speed)
                 continue
             }
             // allocate a process in cpu 
@@ -449,7 +460,7 @@ const Cpu = () => {
             percentpersec=1/pro[qarr[0]][1];
             qarr=qarr.slice(1,qarr.length)
             setq(qarr)
-            await sleep(500)
+            await sleep(5*speed)
             // console.log("here",q,qarr);
 
             // complete a process in cpu 
@@ -466,7 +477,7 @@ const Cpu = () => {
                 for(let i=0;i<pro.length;i++){if(pro[i][2]===times ){qarr.push(i);proLeft--;console.log(`P-${pro[i][0]} arrived in ready queue at ${times} sec`)}}
                 qarr.sort(function(a,b){return pro[a][1]-pro[a][7]-pro[b][1]+pro[b][7]})
                 setq(qarr)
-                await sleep(500)
+                await sleep(5*speed)
             }
 
             // adding process back to ready queue if left
@@ -502,6 +513,7 @@ const Cpu = () => {
         console.log("srjf RR completed")
         document.getElementById("cpu").style.width="0%"
         setrunning(0)
+        setalgo(0)
         settime(0)
         setresult(resultarr)
     }
@@ -510,6 +522,7 @@ const Cpu = () => {
     const rrljf=async()=>{
         if(running){return}
         setrunning(1)
+        setalgo(6)
         refresh()
         console.log("in RR lrjf")
         let qarr=[]
@@ -519,7 +532,7 @@ const Cpu = () => {
         for(let i=0;i<pro.length;i++){if(pro[i][2]===times ){qarr.push(i);proLeft--;console.log(`P-${pro[i][0]} arrived in ready queue at ${times} sec`)}}
         qarr.sort(function(a,b){return pro[b][1]-pro[b][7]-pro[a][1]+pro[a][7]})
         setq(qarr)
-        await sleep(500)
+        await sleep(5*speed)
         let percentpersec=1
         let timeleft=0
         let quantumleft=quantum
@@ -533,7 +546,7 @@ const Cpu = () => {
                 qarr.sort(function(a,b){return pro[b][1]-pro[b][7]-pro[a][1]+pro[a][7]})
                 resultarr.push("NA")
                 setq(qarr)
-                await sleep(500)
+                await sleep(5*speed)
                 continue
             }
             // allocate a process in cpu 
@@ -545,7 +558,7 @@ const Cpu = () => {
             percentpersec=1/pro[qarr[0]][1];
             qarr=qarr.slice(1,qarr.length)
             setq(qarr)
-            await sleep(500)
+            await sleep(5*speed)
 
             // complete a process in cpu 
             while(timeleft>0 && quantumleft>0){
@@ -561,7 +574,7 @@ const Cpu = () => {
                 for(let i=0;i<pro.length;i++){if(pro[i][2]===times ){qarr.push(i);proLeft--;console.log(`P-${pro[i][0]} arrived in ready queue at ${times} sec`)}}
                 qarr.sort(function(a,b){return pro[b][1]-pro[b][7]-pro[a][1]+pro[a][7]})
                 setq(qarr)
-                await sleep(500)
+                await sleep(5*speed)
             }
 
             // adding process back to ready queue if left
@@ -596,6 +609,7 @@ const Cpu = () => {
         console.log("RR lrjf completed")
         document.getElementById("cpu").style.width="0%"
         setrunning(0)
+        setalgo(0)
         settime(0)
         setresult(resultarr)
     }
@@ -603,6 +617,7 @@ const Cpu = () => {
     const fcfs=async()=>{
         if(running){return}
         setrunning(1)
+        setalgo(7)
         refresh()
         console.log("in fcfs")
         let qarr=[]
@@ -639,7 +654,7 @@ const Cpu = () => {
                 mat[targetIndex][4]=mat[targetIndex][5]-mat[targetIndex][1]
                 setpro(mat)
                 
-                await sleep(500)
+                await sleep(5*speed)
                 document.getElementById("cpu").style.width="0%"
                 document.getElementById("cpu-pro-name").innerHTML="P"
             }
@@ -655,7 +670,7 @@ const Cpu = () => {
             continue
         }
             setq(qarr.slice(0,qarr.length))
-            await sleep(500)
+            await sleep(5*speed)
             if(timeleft===0){
                 if(document.getElementById("cpu-pro-name").innerHTML!=="P"){
                     let mat=[]
@@ -689,18 +704,20 @@ const Cpu = () => {
             resultarr.push(document.getElementById("cpu-pro-name").innerHTML)
             times+=1
             settime(times)
-            await sleep(500)
+            await sleep(5*speed)
         }
         console.log("fcfs completed")       
         document.getElementById("cpu").style.width="0%"
         document.getElementById("cpu").style.width="0%"
         setrunning(0)
         settime(0)
+        setalgo(0)
         setresult(resultarr)
     }
     const sjf=async()=>{
         if(running){return}
         setrunning(1)
+        setalgo(8)
         refresh()
         console.log("in sjf")
         let qarr=[]
@@ -738,7 +755,7 @@ const Cpu = () => {
                 mat[targetIndex][4]=mat[targetIndex][5]-mat[targetIndex][1]
                 setpro(mat)
                 
-                await sleep(500)
+                await sleep(5*speed)
                 document.getElementById("cpu").style.width="0%"
                 document.getElementById("cpu-pro-name").innerHTML="P"
             }
@@ -753,7 +770,7 @@ const Cpu = () => {
             continue
         }
             setq(qarr.slice(0,qarr.length))
-            await sleep(500)
+            await sleep(5*speed)
             if(timeleft===0){
                 if(document.getElementById("cpu-pro-name").innerHTML!=="P"){
                     let mat=[]
@@ -788,18 +805,20 @@ const Cpu = () => {
             resultarr.push(document.getElementById("cpu-pro-name").innerHTML)
             times+=1
             settime(times)
-            await sleep(500)
+            await sleep(5*speed)
         }
         console.log("sjf completed")       
         document.getElementById("cpu").style.width="0%"
         document.getElementById("cpu").style.width="0%"
         setrunning(0)
         settime(0)
+        setalgo(0)
         setresult(resultarr)
     }
     const ljf=async()=>{
         if(running){return} 
         setrunning(1)
+        setalgo(9)
         console.log("in ljf")
         let qarr=[]
         // for(let i=0;i<q.length;i++){qarr.push(q[i])}
@@ -838,7 +857,7 @@ const Cpu = () => {
                 mat[targetIndex][4]=mat[targetIndex][5]-mat[targetIndex][1]
                 setpro(mat)
                 
-                await sleep(500)
+                await sleep(5*speed)
                 document.getElementById("cpu").style.width="0%"
                 document.getElementById("cpu-pro-name").innerHTML="P"
             }
@@ -853,7 +872,7 @@ const Cpu = () => {
             continue
         }
             setq(qarr.slice(0,qarr.length))
-            await sleep(500)
+            await sleep(5*speed)
             if(timeleft===0){
                 if(document.getElementById("cpu-pro-name").innerHTML!=="P"){
                     let mat=[]
@@ -888,13 +907,14 @@ const Cpu = () => {
             resultarr.push(document.getElementById("cpu-pro-name").innerHTML)
             times+=1
             settime(times)
-            await sleep(500)
+            await sleep(5*speed)
         }
         console.log("ljf completed")       
         document.getElementById("cpu").style.width="0%"
         document.getElementById("cpu").style.width="0%"
         setrunning(0)
         settime(0)
+        setalgo(0)
         setresult(resultarr)
     }
   return (
@@ -906,21 +926,21 @@ const Cpu = () => {
             <div style={{display:"flex",justifyContent:"left",width:"600px"}}>
                 <div>
                     <div style={{width:"250px",textAlign:"center"}}>Preemptive</div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button type="button" class="btn btn-primary btn-sm" onClick={rr}>Round-Robin Scheduling</button></div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button type="button" class="btn btn-primary btn-sm" onClick={pb}>RR Priority (Multi ready queue)</button></div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button type="button" class="btn btn-primary btn-sm" onClick={srjf}>Shotest Remaining Job First</button></div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button type="button" class="btn btn-primary btn-sm" onClick={lrjf}>Longest Remaining Job First</button></div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button style={{backgroundColor:(algo===1)?"red":""}} type="button" class="btn btn-primary btn-sm" onClick={rr}>Round-Robin Scheduling</button></div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button style={{backgroundColor:(algo===2)?"red":""}} type="button" class="btn btn-primary btn-sm" onClick={pb}>RR Priority (Multi ready queue)</button></div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button style={{backgroundColor:(algo===3)?"red":""}} type="button" class="btn btn-primary btn-sm" onClick={srjf}>Shotest Remaining Job First</button></div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button style={{backgroundColor:(algo===4)?"red":""}} type="button" class="btn btn-primary btn-sm" onClick={lrjf}>Longest Remaining Job First</button></div>
                 </div>
                 <div>  
                     <div style={{width:"200px",textAlign:"center"}}>Preemptive(mixed)</div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button type="button" class="btn btn-primary btn-sm" onClick={rrsjf}>RR-SJF</button></div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button type="button" class="btn btn-primary btn-sm" onClick={rrljf}>RR-LJF</button></div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button style={{backgroundColor:(algo===5)?"red":""}} type="button" class="btn btn-primary btn-sm" onClick={rrsjf}>RR-SJF</button></div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button style={{backgroundColor:(algo===6)?"red":""}} type="button" class="btn btn-primary btn-sm" onClick={rrljf}>RR-LJF</button></div>
                 </div>
                 <div>
                     <div style={{width:"200px",textAlign:"center"}}>Non-Preemptive</div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button type="button" class="btn btn-primary btn-sm" onClick={fcfs}>First come First served</button></div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button type="button" class="btn btn-primary btn-sm" onClick={sjf}>Shortest Job First</button></div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button type="button" class="btn btn-primary btn-sm" onClick={ljf}>Longest Job First</button></div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button style={{backgroundColor:(algo===7)?"red":""}} type="button" class="btn btn-primary btn-sm" onClick={fcfs}>First come First served</button></div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button style={{backgroundColor:(algo===8)?"red":""}} type="button" class="btn btn-primary btn-sm" onClick={sjf}>Shortest Job First</button></div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button style={{backgroundColor:(algo===9)?"red":""}} type="button" class="btn btn-primary btn-sm" onClick={ljf}>Longest Job First</button></div>
                 </div>
             </div>
         </div>
@@ -943,7 +963,7 @@ const Cpu = () => {
                         if(running){return}
                         let mat=[];
                         document.getElementById(`p-${v}`).style.backgroundColor="red"
-                        await sleep(500)
+                        await sleep(5*speed)
                         document.getElementById(`p-${v}`).style.backgroundColor=""
                         for(let i=0;i<pro.length;i++){
                             if (i!==v){mat.push(pro[i])}
@@ -991,6 +1011,12 @@ const Cpu = () => {
                     <input type="integer"  value={quantum} onChange={(e)=>{setquantum(Number(e.target.value))}} style={{width:"40px"}}/>
                   </label>
                 </form>
+        <div style={{marginTop:"5px",marginBottom:"10px",marginLeft:"50px"}}>Adjust Speed:</div>
+            <div style={{marginLeft:"10px"}}>
+                <button type="button" className={classNames("btn", (speed!==500)?"btn-light":"btn-info", "btn-sm", "border",(speed===500)?"border-link":"",(speed===500)?"border-5":"")} style={{marginLeft:"10px"}} onClick={()=>{setspeed(500)}}>Slow</button>
+                <button type="button" className={classNames("btn", (speed!==100)?"btn-light": "btn-info", "btn-sm", "border",(speed===100)?"border-link": "",(speed===100)?"border-5":"")} style={{marginLeft:"10px" }} onClick={()=>{setspeed(100)}}>Medium</button>
+                <button type="button" className={classNames("btn", (speed!==10)?"btn-light": "btn-info", "btn-sm", "border",(speed===10)?"border-link": "",(speed===10)?"border-5":"")} style={{marginLeft:"10px" }} onClick={()=>{setspeed(10)}}>Fast</button>
+            </div>
                 
     </div>
     <div style={{width:"170px",marginLeft:"100px"}}>Ready- Queue (in ram)</div>
@@ -1096,5 +1122,7 @@ const Cpu = () => {
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms/3));
 }
-
+function classNames(...args) {
+    return args.filter(Boolean).join(' ')
+  }
 export default Cpu

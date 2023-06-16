@@ -1,5 +1,6 @@
 import  React, { useState,useEffect} from 'react';
 import LeaderLine from "leader-line-new";
+import YoutubeEmbed from './utils/Youtube';
 
 function Canvas(){
   const [nodes,Setnodes]=useState(1)
@@ -22,7 +23,6 @@ function Canvas(){
 // bfs
 const bfs=async()=>{
   if(running){return}
-  setrunning(1)
   if (nodes===0||nodes===1){
     alert("not enough nodes to execute algorithm");
     return;
@@ -31,6 +31,7 @@ const bfs=async()=>{
     alert("wrong starting node");
     return;
   }
+  setrunning(1)
   document.getElementById(`resultText`).innerText="";
   for(let i=0;i<nodes-1;i++){
     document.getElementById(`${arr[i]}`).style.backgroundColor="green";
@@ -46,21 +47,20 @@ const bfs=async()=>{
         visited.add(vertex);
         result.push(vertex);
         document.getElementById(`${arr[vertex-1]}`).style.backgroundColor="red";
-        document.getElementById(`resultText`).innerText=document.getElementById(`resultText`).innerText+` ${vertex}`;
+        document.getElementById(`resultText`).innerText=document.getElementById(`resultText`).innerText+` ${vertex} - `;
         await sleep(1000);
         for (const neighbor of graph[vertex]) {
           queue.push(neighbor);
         }
       }
     }
-  
+    document.getElementById(`resultText`).innerText=document.getElementById(`resultText`).innerText.slice(0,document.getElementById(`resultText`).innerText.length-2)
     console.log(result);
 setrunning(0)
   }
 // dfs
 const dfs=async()=>{
   if(running){return}
-  setrunning(1)
   if (nodes===0||nodes===1){
     alert("not enough nodes to execute algorithm");
     return;
@@ -69,6 +69,7 @@ const dfs=async()=>{
     alert("wrong starting node");
     return;
   }
+  setrunning(1)
   document.getElementById(`resultText`).innerText="";
   for(let i=0;i<nodes-1;i++){
     document.getElementById(`${arr[i]}`).style.backgroundColor="green";
@@ -84,7 +85,7 @@ const dfs=async()=>{
       visited.add(vertex);
       result.push(vertex);
         document.getElementById(`${arr[vertex-1]}`).style.backgroundColor="red";
-        document.getElementById(`resultText`).innerText=document.getElementById(`resultText`).innerText+` ${vertex}`;
+        document.getElementById(`resultText`).innerText=document.getElementById(`resultText`).innerText+` ${vertex} - `;
         await sleep(1000);
         for (const neighbor of graph[vertex]) {
         stack.push(neighbor);
@@ -92,13 +93,14 @@ const dfs=async()=>{
     }
   }
   console.log(result);
+  document.getElementById(`resultText`).innerText=document.getElementById(`resultText`).innerText.slice(0,document.getElementById(`resultText`).innerText.length-2)
+
 setrunning(0)
 
 } 
 // djkstras
 const djk=async(graph=adjlist, src=d)=> {
   if(running){return}
-  setrunning(1)
   if (nodes===0||nodes===1){
     alert("not enough nodes to execute algorithm");
     return;
@@ -107,6 +109,8 @@ const djk=async(graph=adjlist, src=d)=> {
     alert("wrong starting node");
     return;
   }
+  
+  setrunning(1)
   document.getElementById(`resultText`).innerText="";
   for(let i=0;i<nodes-1;i++){
     document.getElementById(`${arr[i]}`).style.backgroundColor="green";
@@ -150,13 +154,13 @@ while(1){
     break
   }
 }
+  document.getElementById("resultText").innerHTML= document.getElementById("resultText").innerHTML.slice(0,document.getElementById("resultText").innerHTML.length-2)
 setrunning(0)
 
 }
 // bip
 const bip=async()=>{
   if(running){return}
-  setrunning(1)
   if (nodes===0||nodes===1){
     alert("not enough nodes to execute algorithm");
     return;
@@ -165,6 +169,8 @@ const bip=async()=>{
     alert("wrong starting node");
     return;
   }
+  
+  setrunning(1)
   for(let i=0;i<nodes-1;i++){
     document.getElementById(`${arr[i]}`).style.backgroundColor="green";
   }
@@ -423,59 +429,82 @@ setrunning(0)
   }
 
         return (
-          <div style={{display:"flex"}}>
-            <div style={{display:"flex", paddingRight:"30px"}}>
-              <div>sidebar</div>
-              <div>
-                <h2>Add edge</h2>
+          <div style={{paddingLeft:"50px"}}>
+      <div style={{display:"flex",justifyContent:"left",width:"1450px",margin:"10px"}}>
+      <div style={{marginLeft:"30px",width:"600px",marginTop:"30px",display:"flex"}}>
+        <h5 style={{width:"100px",color:"brown"}}>Visualize:</h5>
+                <button type="button" class="btn btn-primary btn-sm" onClick={bfs} style={{marginLeft:"0px"}}>BFS</button>
+                <button type="button" class="btn btn-primary btn-sm" onClick={dfs} style={{marginLeft:"10px"}}>DFS</button>
+                <button type="button" class="btn btn-primary btn-sm" onClick={djk} style={{marginLeft:"10px"}}>Dijkstra's</button>
+                <button type="button" class="btn btn-primary btn-sm" onClick={bip} style={{marginLeft:"10px"}}>Check bi-partite</button>
+
+              </div>
+        <h2 style={{fontWeight:"bolder",color:"red", textShadow: "0 0 1px blue",paddingLeft:"5px",paddingRight:"5px"}}>GRAPH ALGORITHMS</h2>
+        
+        <div style={{marginLeft:"160px",marginTop:"30px"}}>
+                <button type="button" class="btn btn-primary btn-sm" style={{marginRight:"10px"}}onClick={adjmatfn}>Get adjacency Matrix</button>
+                <button type="button" class="btn btn-primary btn-sm" style={{marginRight:"10px"}}onClick={adjlistfn}>Get adjacency List</button>
+              </div>
+        </div>
+
+          <div style={{display:"flex",marginLeft:"30px"}}>
+            <div style={{display:"flex", paddingRight:"20px"}}>
+              <div style={{marginTop:"30px"}}>
+                <h6>Add edge:</h6>
                 <form onSubmit={addEdge}>
                   <label>
                     select nodes:
-                    <input type="integer"  value={a} onChange={(e)=>{seta(Number(e.target.value))}}/>
-                    <input type="integer"  value={b} onChange={(e)=>{setb(Number(e.target.value))}}/>
-                    distance between them
-                    <input type="integer"  value={c} onChange={(e)=>{setc(Number(e.target.value))}}/>
+                    <input type="integer" style={{width:"50px",marginLeft:"20px"}} value={a} onChange={(e)=>{seta(Number(e.target.value))}}/>
+                    <input type="integer" style={{width:"50px",marginLeft:"20px"}} value={b} onChange={(e)=>{setb(Number(e.target.value))}}/> 
+                    <div style={{margin:"5px"}}></div><label>Add Distance between them :</label>
+                    <input type="integer" style={{width:"50px",marginLeft:"20px"}} value={c} onChange={(e)=>{setc(Number(e.target.value))}}/>
                   </label>
-                  <input type="submit" value="Add directed Edge" />
+                  <div></div>
+                  <input type="submit" class="btn btn-warning btn-sm" value="Add directed Edge" />
                 </form>
                 <form onSubmit={addEdges}>
-                  <input type="submit" value="Add undirected Edge" />
+                  <div style={{margin:"5px"}}></div>
+                  <input type="submit" class="btn btn-warning btn-sm" value="Add undirected Edge" />
                 </form>
-                <div style={{paddingTop:"50px"}}>
+                <div style={{paddingTop:"20px"}}>
               <form onSubmit={setStart}>
                   <label>
-                    select Starting node:
-                    <input type="integer"  value={d} onChange={(e)=>{setd(Number(e.target.value))}}/>
+                    Starting node:
+                    <input type="integer" style={{width:"40px",marginRight:"10px",marginLeft:"10px"}} value={d} onChange={(e)=>{setd(Number(e.target.value))}}/>
                   </label>
-                  <input type="submit" value="submit" />
+                  <input type="submit" value="submit" class="btn btn-primary btn-sm" />
                 </form>
               </div>
               <div>
-                <button onClick={delnode}>Undo node</button>
+                <button type="button" class="btn btn-secondary btn-sm" onClick={delnode}>Undo node</button>
               </div>
-              <div style={{marginBottom:"30px",marginTop:"30px"}}>
-                <button onClick={bfs} style={{marginLeft:"1px"}}>bfs</button>
-                <button onClick={dfs} style={{marginLeft:"10px"}}>dfs</button>
-                <button onClick={djk} style={{marginLeft:"10px"}}>djikstra's</button>
-                <button onClick={bip} style={{marginLeft:"10px"}}>Check bi-partite</button>
+              <div class="algorithm-description" style={{marginTop:"30px"}}>
+  <p>
+    <strong>BFS (Breadth-First Search):</strong> A graph traversal algorithm that explores all neighbors of a node before moving to the next level.
+  </p>
+  <p>
+    <strong>DFS (Depth-First Search):</strong> A graph traversal algorithm that explores as far as possible along each branch before backtracking.
+  </p>
+  <p>
+    <strong>Dijkstra's Algorithm:</strong> A shortest path algorithm that finds the shortest path between nodes in a weighted graph.
+  </p>
+  <p>
+    <strong>Bipartite:</strong> A graph property where the vertices can be divided into two disjoint sets such that no two vertices within the same set have an edge connecting them.
+  </p>
+</div>
 
-              </div>
-              <div>
-                <button onClick={adjmatfn}>Get adjacency Matrix</button>
-                <button onClick={adjlistfn}>Get adjacency List</button>
-              </div>
               </div>
             </div>
             <div>
-              <div style={{textAlign:"right"}}>
+              <div style={{textAlign:"left"}}>
               <div style={{display:"inline",float:"left"}}>
-                  <div style={{display:"inline",float:"left",textAlign:"left"}}>result : </div>
-                  <div id='resultText' style={{display:"inline",float:"left",width:"700px",textAlign:"left",marginLeft:"10px"}}></div>
+                  <div style={{display:"inline",float:"left",textAlign:"left"}}>Result : </div>
+                  <div id='resultText' style={{display:"inline",float:"left",width:"660px",textAlign:"left",marginLeft:"10px",color:"green",fontWeight:"bolder"}}></div>
                 </div>
-                <button onClick={creategraph1}>Sample Graph-1</button>
-                <button onClick={creategraph2}>Sample Graph-2</button>
+                <button class="btn btn-secondary btn-sm"  onClick={creategraph1} style={{marginLeft:"10px"}}>Sample Graph-1</button>
+                <button class="btn btn-secondary btn-sm"  onClick={creategraph2} style={{marginLeft:"10px"}}>Sample Graph-2</button>
               </div>
-            <div className="Grid" style={{border:"solid", margin:"0px",padding:"0px"}}>
+            <div className="Grid" style={{border:"solid", marginRight:"30px",padding:"0px"}}>
                 {Array.apply(0, Array(15)).map(function (x, i) {
                 return  <div>
                   <div className={`row-${i}`} style={{display:"flex"}}>
@@ -509,6 +538,46 @@ setrunning(0)
                 })}
                 </div>
             </div>
+          </div>
+                  
+    <div style={{display:"flex",marginTop:"30px",marginLeft:"50px",color:"orangered"}}><h2>Learn More </h2></div>
+    <hr style={{width:"95%",margin:"auto"}}></hr>
+    <div className='' style={{display: "flex",marginTop:"30px",color:"green",textAlign:"center"}}>
+        
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="59fUtYYz7ZU" title="Graphs Overview" />  </div>
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="XB4MIexjvY0" title="Dijkstra's Algorithm"/></div>
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="-vu34sct1g8" title="Bipartite Graph"/></div>
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="UPfUFoWjk5w" title="Cycle in graph"/>    </div>
+   </div>
+   <div className='' style={{display: "flex",marginTop:"30px",color:"green",textAlign:"center"}}>   
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="5lZ0iJMrUMk" title="Topological Sort"/>    </div> 
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="0vVofAhAYjc" title="Bellman Ford"/>     </div> 
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="YbY8cVwWAvw" title="Floyd Warshall"/>     </div> 
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}> <YoutubeEmbed embedId="4ZlRH0eK-qQ" title="Prims & Kruskal MST"/>      </div> 
+    </div>
+    <div className='' style={{display: "flex",marginTop:"30px",color:"green",textAlign:"center"}}>
+        
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="aBxjDBC4M1U" title="DSU" />  </div>
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}></div>
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}></div>
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}>   </div>
+   </div>
+
+    <div>
+    <div style={{display:"flex",marginTop:"30px",marginLeft:"50px",color:"orangered"}}><h2>Practice Graph Algorithms</h2></div>
+    <hr style={{width:"95%",margin:"auto"}}></hr>
+<div style={{textAlign:"left",width:"1400px",marginLeft:"50px"}}>
+<p><strong><a name="bfsndfs"></a>BFS and DFS in Graph:</strong></p>
+<ol><li><a href="https://www.geeksforgeeks.org/breadth-first-traversal-for-a-graph/">Breadth First Traversal for a Graph</a></li><li><a href="https://www.geeksforgeeks.org/depth-first-traversal-for-a-graph/">Depth First Traversal for a Graph</a></li><li><a href="https://www.geeksforgeeks.org/applications-of-depth-first-search/">Applications of Depth First Search</a></li><li><a href="https://www.geeksforgeeks.org/applications-of-breadth-first-traversal/">Applications of Breadth First Traversal</a></li><li><a href="https://www.geeksforgeeks.org/iterative-depth-first-traversal/">Iterative Depth First Search</a></li><li><a href="https://www.geeksforgeeks.org/bfs-disconnected-graph/">BFS for Disconnected Graph</a></li><li><a href="https://www.geeksforgeeks.org/transitive-closure-of-a-graph-using-dfs/">Transitive Closure of a Graph using DFS</a></li><li><a href="https://www.geeksforgeeks.org/difference-between-bfs-and-dfs/">Difference between BFS and DFS</a></li></ol>
+<p><strong><a name="cycle"></a>Cycles in Graph:</strong></p>
+<ol><li><a href="https://www.geeksforgeeks.org/detect-cycle-in-a-graph/">Detect Cycle in a Directed Graph</a></li><li><a href="https://www.geeksforgeeks.org/detect-cycle-undirected-graph/">Detect cycle in an undirected graph</a></li><li><a href="https://www.geeksforgeeks.org/detect-cycle-direct-graph-using-colors/">Detect cycle in a direct graph using colors</a></li><li><a href="https://www.geeksforgeeks.org/detect-negative-cycle-graph-bellman-ford/">Detect a negative cycle in a Graph | (Bellman Ford)</a></li><li><a href="https://www.geeksforgeeks.org/cycles-of-length-n-in-an-undirected-and-connected-graph/">Cycles of length n in an undirected and connected graph</a></li><li><a href="https://www.geeksforgeeks.org/detecting-negative-cycle-using-floyd-warshall/">Detecting negative cycle using Floyd Warshall</a></li><li><a href="https://www.geeksforgeeks.org/clone-directed-acyclic-graph/">Clone a Directed Acyclic Graph</a></li><li><a href="https://www.geeksforgeeks.org/union-by-rank-and-path-compression-in-union-find-algorithm/">Union By Rank and Path Compression in Union-Find Algorithm</a></li><li><a href="https://www.geeksforgeeks.org/introduction-to-disjoint-set-data-structure-or-union-find-algorithm/">Introduction to Disjoint Set Data Structure or Union-Find Algorithm</a></li></ol>
+<p><strong><a name="shortest"></a>Shortest Path in Graph:</strong></p>
+<ol><li><a href="https://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/">Dijkstra’s shortest path algorithm</a></li><li><a href="https://www.geeksforgeeks.org/dynamic-programming-set-23-bellman-ford-algorithm/">Bellman–Ford Algorithm</a></li><li><a href="https://www.geeksforgeeks.org/dynamic-programming-set-16-floyd-warshall-algorithm/">Floyd Warshall Algorithm</a></li><li><a href="https://www.geeksforgeeks.org/johnsons-algorithm/">Johnson’s algorithm for All-pairs shortest paths</a></li><li><a href="https://www.geeksforgeeks.org/shortest-path-for-directed-acyclic-graphs/">Shortest Path in Directed Acyclic Graph</a></li><li><a href="https://www.geeksforgeeks.org/dials-algorithm-optimized-dijkstra-for-small-range-weights/">Dial’s Algorithm</a></li><li><a href="https://www.geeksforgeeks.org/multistage-graph-shortest-path/">Multistage Graph (Shortest Path)</a></li><li><a href="https://www.geeksforgeeks.org/shortest-path-unweighted-graph/">Shortest path in an unweighted graph</a></li><li><a href="https://www.geeksforgeeks.org/karps-minimum-mean-average-weight-cycle-algorithm/">Karp’s minimum mean (or average) weight cycle algorithm</a></li><li><a href="https://www.geeksforgeeks.org/0-1-bfs-shortest-path-binary-graph/">0-1 BFS (Shortest Path in a Binary Weight Graph)</a></li><li><a href="https://www.geeksforgeeks.org/find-minimum-weight-cycle-undirected-graph/">Find minimum weight cycle in an undirected graph</a></li></ol>
+<p><strong><a name="mustdo"></a>Some must do Problems on Graph:</strong></p>
+<ol><li><a href="https://www.geeksforgeeks.org/find-length-largest-region-boolean-matrix/">Find length of the largest region in Boolean Matrix</a></li><li><a href="https://www.geeksforgeeks.org/count-number-trees-forest/">Count number of trees in a forest</a></li><li><a href="https://www.geeksforgeeks.org/peterson-graph/">A Peterson Graph Problem</a></li><li><a href="https://www.geeksforgeeks.org/clone-an-undirected-graph/">Clone an Undirected Graph</a></li><li><a href="https://www.geeksforgeeks.org/graph-coloring-applications/">Graph Coloring (Introduction and Applications)</a></li><li><a href="https://www.geeksforgeeks.org/traveling-salesman-problem-tsp-implementation/">Traveling Salesman Problem (TSP) Implementation</a></li><li><a href="https://www.geeksforgeeks.org/vertex-cover-problem-set-1-introduction-approximate-algorithm-2/">Vertex Cover Problem | Set 1 (Introduction and Approximate Algorithm)</a></li><li><a href="https://www.geeksforgeeks.org/k-centers-problem-set-1-greedy-approximate-algorithm/">K Centers Problem | Set 1 (Greedy Approximate Algorithm)</a></li><li><a href="https://www.geeksforgeeks.org/erdos-renyl-model-generating-random-graphs/">Erdos Renyl Model (for generating Random Graphs)</a></li><li><a href="https://www.geeksforgeeks.org/chinese-postman-route-inspection-set-1-introduction/">Chinese Postman or Route Inspection | Set 1 (introduction)</a></li><li><a href="https://www.geeksforgeeks.org/hierholzers-algorithm-directed-graph/">Hierholzer’s Algorithm for directed graph</a></li><li><a href="https://www.geeksforgeeks.org/bipartite-graph/">Check whether a given graph is Bipartite or not</a></li><li><a href="https://www.geeksforgeeks.org/snake-ladder-problem-2/">Snake and Ladder Problem</a></li><li><a href="https://www.geeksforgeeks.org/boggle-find-possible-words-board-characters/">Boggle (Find all possible words in a board of characters)</a></li><li><a href="https://www.geeksforgeeks.org/hopcroft-karp-algorithm-for-maximum-matching-set-1-introduction/">Hopcroft Karp Algorithm for Maximum Matching-Introduction</a></li><li><a href="https://www.geeksforgeeks.org/minimum-time-required-so-that-all-oranges-become-rotten/">Minimum Time to rot all oranges</a></li><li><a href="https://www.geeksforgeeks.org/construct-graph-given-degrees-vertices/">Construct a graph from given degrees of all vertices</a></li><li><a href="https://www.geeksforgeeks.org/determine-whether-universal-sink-exists-directed-graph/">Determine whether a universal sink exists in a directed graph</a></li><li><a href="https://www.geeksforgeeks.org/number-sink-nodes-graph/">Number of sink nodes in a graph</a></li><li><a href="https://www.geeksforgeeks.org/two-clique-problem-check-graph-can-divided-two-cliques/">Two Clique Problem (Check if Graph can be divided in two Cliques)</a></li></ol>
+
+</div>
+    </div>
           </div>);
     }
 
