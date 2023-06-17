@@ -89,7 +89,7 @@ const Cpu = () => {
                 settime(times)
                 for(let i=0;i<pro.length;i++){if(pro[i][2]===times ){qarr.push(i);proLeft--;console.log(`P-${pro[i][0]} arrived in ready queue at ${times} sec`);
                 if(pro[i][1]<timeleft){quantumleft=0}}}
-                qarr.sort(function(a,b){return pro[a][1]-pro[a][7]-pro[b][1]+pro[b][7]})
+                qarr.sort(function(a,b){return pro[a][1]-pro[b][1]})
                 setq(qarr)
                 await sleep(5*speed)
             }
@@ -103,7 +103,7 @@ const Cpu = () => {
                 setpro(mat);
 
                 qarr.push(index);
-                qarr.sort(function(a,b){return pro[a][1]-pro[a][7]-pro[b][1]+pro[b][7]});
+                qarr.sort(function(a,b){return pro[a][1]-pro[b][1]});
                 setq(qarr);
                 await sleep(5*speed)
             }
@@ -185,7 +185,7 @@ const Cpu = () => {
                 times++;
                 settime(times)
                 for(let i=0;i<pro.length;i++){if(pro[i][2]===times ){qarr.push(i);proLeft--;console.log(`P-${pro[i][0]} arrived in ready queue at ${times} sec`);if(pro[i][1]>timeleft){quantumleft=0}}}
-                qarr.sort(function(a,b){return pro[b][1]-pro[b][7]-pro[a][1]+pro[a][7]})
+                qarr.sort(function(a,b){return pro[b][1]-pro[a][1]})
                 setq(qarr)
                 await sleep(5*speed)
             }
@@ -199,7 +199,7 @@ const Cpu = () => {
                 setpro(mat);
 
                 qarr.push(index);
-                qarr.sort(function(a,b){return pro[b][1]-pro[b][7]-pro[a][1]+pro[a][7]});
+                qarr.sort(function(a,b){return pro[b][1]-pro[a][1]});
                 setq(qarr);
                 await sleep(5*speed)
             }
@@ -632,6 +632,7 @@ const Cpu = () => {
             }
 
             if(qarr.length===0){
+                // alert(11+timeleft)
                 if(timeleft!==0){
                     timeleft-=1
                     for(let i=0;i<20;i++){
@@ -663,7 +664,22 @@ const Cpu = () => {
             continue
             }
             else{
+                let mat=[]
+                for(let j=0;j<pro.length;j++){mat.push(pro[j])}
+                let kkk=document.getElementById("cpu-pro-name").innerHTML.length
+                let targetProcess=Number(document.getElementById("cpu-pro-name").innerHTML.slice(2,kkk))
+                let targetIndex=0;
+                console.log(targetProcess,"yp",document.getElementById("cpu-pro-name").innerHTML,kkk)
+                for(let i=0;i<pro.length;i++){
+                    if (pro[i][0]===targetProcess){targetIndex=i}
+                }
+                mat[targetIndex][6]=times
+                mat[targetIndex][5]=mat[targetIndex][6]-mat[targetIndex][2]
+                mat[targetIndex][4]=mat[targetIndex][5]-mat[targetIndex][1]
+                setpro(mat)
+                // alert(times)
                 resultarr.push("NA")
+                
             }
             times+=1
             settime(times)
@@ -682,8 +698,8 @@ const Cpu = () => {
                         if (pro[i][0]===targetProcess){targetIndex=i}
                     }
                     console.log(targetProcess,"yp",document.getElementById("cpu-pro-name").innerHTML,kkk)
-                    
-                    mat[targetIndex][6]=times
+                    if(mat[targetIndex][6]===0){
+                    mat[targetIndex][6]=times}
                     mat[targetIndex][5]=mat[targetIndex][6]-mat[targetIndex][2]
                     mat[targetIndex][4]=mat[targetIndex][5]-mat[targetIndex][1]
                     setpro(mat)
@@ -763,6 +779,19 @@ const Cpu = () => {
             settime(times)
             continue
             }else{
+                let mat=[]
+                for(let j=0;j<pro.length;j++){mat.push(pro[j])}
+                let kkk=document.getElementById("cpu-pro-name").innerHTML.length
+                let targetProcess=Number(document.getElementById("cpu-pro-name").innerHTML.slice(2,kkk))
+                let targetIndex=0;
+                console.log(targetProcess,"yp",document.getElementById("cpu-pro-name").innerHTML,kkk)
+                for(let i=0;i<pro.length;i++){
+                    if (pro[i][0]===targetProcess){targetIndex=i}
+                }
+                mat[targetIndex][6]=times
+                mat[targetIndex][5]=mat[targetIndex][6]-mat[targetIndex][2]
+                mat[targetIndex][4]=mat[targetIndex][5]-mat[targetIndex][1]
+                setpro(mat)
                 resultarr.push("NA")
             }
             times+=1
@@ -860,11 +889,21 @@ const Cpu = () => {
                 await sleep(5*speed)
                 document.getElementById("cpu").style.width="0%"
                 document.getElementById("cpu-pro-name").innerHTML="P"
-            }
-            times+=1
-            settime(times)
-            continue
+                }
             }else{
+                let mat=[]
+                for(let j=0;j<pro.length;j++){mat.push(pro[j])}
+                let kkk=document.getElementById("cpu-pro-name").innerHTML.length
+                let targetProcess=Number(document.getElementById("cpu-pro-name").innerHTML.slice(2,kkk))
+                let targetIndex=0;
+                console.log(targetProcess,"yp",document.getElementById("cpu-pro-name").innerHTML,kkk)
+                for(let i=0;i<pro.length;i++){
+                    if (pro[i][0]===targetProcess){targetIndex=i}
+                }
+                mat[targetIndex][6]=times
+                mat[targetIndex][5]=mat[targetIndex][6]-mat[targetIndex][2]
+                mat[targetIndex][4]=mat[targetIndex][5]-mat[targetIndex][1]
+                setpro(mat)
                 resultarr.push("NA")
             }
             times+=1
@@ -885,9 +924,9 @@ const Cpu = () => {
                     }
                     console.log(targetProcess,"yp",document.getElementById("cpu-pro-name").innerHTML,kkk)
                     if(mat[targetIndex][6]===0){
-                    mat[targetIndex][6]=times}
+                    mat[targetIndex][6]=times
                     mat[targetIndex][5]=mat[targetIndex][6]-mat[targetIndex][2]
-                    mat[targetIndex][4]=mat[targetIndex][5]-mat[targetIndex][1]
+                    mat[targetIndex][4]=mat[targetIndex][5]-mat[targetIndex][1]}
                     setpro(mat)
                 // console.log(mat,"ksssssssxsaaaaaa")
                 }

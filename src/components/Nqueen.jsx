@@ -153,7 +153,7 @@ const Nqueen = () => {
                 <button type="button" className={classNames("btn", (speed!==500)?"btn-light": "btn-info", "btn-sm", "border",(speed===500)?"border-link": "",(speed===500)?"border-5":"")} style={{marginLeft:"10px" }} onClick={()=>{setspeed(500)}}>Medium</button>
                 <button type="button" className={classNames("btn", (speed!==100)?"btn-light": "btn-info", "btn-sm", "border",(speed===100)?"border-link": "",(speed===100)?"border-5":"")} style={{marginLeft:"10px" }} onClick={()=>{setspeed(100)}}>Fast</button>
             </div>
-            <div style={{marginTop:"20px"}}>
+            <div style={{marginTop:"20px",width:"500px"}}>
   <h3>N-Queen Problem: Backtracking Method</h3>
   <ul>
     <li>Start with an empty <code>n x n</code> chessboard, representing <code>n</code> rows and columns.</li>

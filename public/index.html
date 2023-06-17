@@ -14,21 +14,25 @@
     <title>Algoviz</title>
     <script>
       /* Storing user's device details in a variable*/
-      let details = navigator.userAgent;
+      // let details = navigator.userAgent;
       
-      /* Creating a regular expression
-      containing some mobile devices keywords
-      to search it in details string*/
-      let regexp = /android|iphone|kindle|ipad/i;
+      // /* Creating a regular expression
+      // containing some mobile devices keywords
+      // to search it in details string*/
+      // let regexp = /android|iphone|kindle|ipad/i;
       
-      /* Using test() method to search regexp in details
-      it returns boolean value*/
-      let isMobileDevice = regexp.test(details);
+      // /* Using test() method to search regexp in details
+      // it returns boolean value*/
+      // let isMobileDevice = regexp.test(details);
       
-      if (isMobileDevice) {
-         alert("This website has been specifically tailored for laptop screens. While you're currently accessing it on a mobile or iPad screen, we recommend switching to a laptop for an optimal browsing experience. The website's layout and features have been optimized to provide a seamless and enhanced user experience on laptop screens.");
-         alert("Final warning: There may be some misalignment of components in the user interface")
-        } 
+      // if (isMobileDevice) {
+      //    alert("This website has been specifically tailored for laptop screens. While you're currently accessing it on a mobile or iPad screen, we recommend switching to a laptop for an optimal browsing experience. The website's layout and features have been optimized to provide a seamless and enhanced user experience on laptop screens.");
+      //    alert("Final warning: There may be some misalignment of components in the user interface")
+      //   } 
+      if(screen.width<700){
+        alert("This website has been specifically tailored for laptop screens. While you're currently accessing it on a mobile or iPad screen, we recommend switching to a laptop for an optimal browsing experience. The website's layout and features have been optimized to provide a seamless and enhanced user experience on laptop screens.");
+        alert("Final warning: There may be some misalignment of components in the user interface")
+      }
    </script>
   </head>
   <body>

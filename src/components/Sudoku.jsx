@@ -118,14 +118,7 @@ const Sudoku = () => {
             <button class="btn btn-primary " style={{marginLeft:"30px"}} onClick={solver}>Backtrack solution</button>
             <button class="btn btn-primary " style={{marginLeft:"30px"}} onClick={randomize}>Fill starting grid</button>
 
-            <div style={{marginTop:"15px",marginBottom:"10px",marginLeft:"40px"}}>Adjust Speed:</div>
-            <div style={{marginLeft:"40px"}}>
-                <button type="button" className={classNames("btn", (speed!==500)?"btn-light":"btn-info", "btn-sm", "border",(speed===500)?"border-link":"",(speed===500)?"border-5":"")} style={{marginLeft:"10px"}} onClick={()=>{setspeed(500)}}>Slow</button>
-                <button type="button" className={classNames("btn", (speed!==200)?"btn-light": "btn-info", "btn-sm", "border",(speed===200)?"border-link": "",(speed===200)?"border-5":"")} style={{marginLeft:"10px" }} onClick={()=>{setspeed(200)}}>Medium</button>
-                <button type="button" className={classNames("btn", (speed!==50)?"btn-light": "btn-info", "btn-sm", "border",(speed===50)?"border-link": "",(speed===50)?"border-5":"")} style={{marginLeft:"10px" }} onClick={()=>{setspeed(50)}}>Fast</button>
-            </div>
-
-<div style={{marginTop:"20px"}}>
+<div style={{marginTop:"20px",width:"500px"}}>
   <h3>Sudoku Problem: Backtracking Method</h3>
   <ul>
     <li>Start with an empty Sudoku grid consisting of a <code>9 x 9</code> board divided into <code>3 x 3</code> subgrids.</li>

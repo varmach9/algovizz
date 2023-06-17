@@ -478,7 +478,7 @@ setrunning(0)
               <div>
                 <button type="button" class="btn btn-secondary btn-sm" onClick={delnode}>Undo node</button>
               </div>
-              <div class="algorithm-description" style={{marginTop:"30px"}}>
+              <div class="algorithm-description" style={{marginTop:"30px",width:"385px"}}>
   <p>
     <strong>BFS (Breadth-First Search):</strong> A graph traversal algorithm that explores all neighbors of a node before moving to the next level.
   </p>

@@ -85,7 +85,7 @@ const TowersOfHanoi=()=>{
     <div style={{width:"200px",height:"330px",border:"1px solid",alignContent:"center"}}>
         <div className="polearea"style={{width:"200px",height:"300px",display:"flex",justifyContent:"center"}}>
           <div>
-          <div className="pole"style={{width:"20px",height:`${300-21*dt1.length}px`,backgroundColor:"blue",margin:"auto"}}></div>
+          <div className="pole"style={{width:"20px",height:`${300-20*dt1.length}px`,backgroundColor:"blue",margin:"auto"}}></div>
           <div style={{justifyContent:"center"}}>
               {dt1.map((v,k)=>{
                 return <div style={{width:`${30*v}px`,height:"20px",backgroundColor:"green",margin:"0 auto",textAlign:"center",border:"1px solid"}}>{v}</div>
@@ -99,7 +99,7 @@ const TowersOfHanoi=()=>{
       <div style={{width:"200px",height:"330px",border:"1px solid",alignContent:"center"}}>
         <div className="polearea"style={{width:"200px",height:"300px",display:"flex",justifyContent:"center"}}>
           <div>
-          <div className="pole"style={{width:"20px",height:`${300-21*dt2.length}px`,backgroundColor:"blue",margin:"auto"}}></div>
+          <div className="pole"style={{width:"20px",height:`${300-20*dt2.length}px`,backgroundColor:"blue",margin:"auto"}}></div>
           <div style={{justifyContent:"center"}}>
               {dt2.map((v,k)=>{
                 return <div style={{width:`${30*v}px`,height:"20px",backgroundColor:"green",margin:"0 auto",textAlign:"center",border:"1px solid"}}>{v}</div>
@@ -112,7 +112,7 @@ const TowersOfHanoi=()=>{
       <div style={{width:"200px",height:"330px",border:"1px solid",alignContent:"center"}}>
         <div className="polearea"style={{width:"200px",height:"300px",display:"flex",justifyContent:"center"}}>
           <div>
-          <div className="pole"style={{width:"20px",height:`${300-21*dt3.length}px`,backgroundColor:"blue",margin:"auto"}}></div>
+          <div className="pole"style={{width:"20px",height:`${300-20*dt3.length}px`,backgroundColor:"blue",margin:"auto"}}></div>
           <div style={{justifyContent:"center"}}>
               {dt3.map((v,k)=>{
                 return <div style={{width:`${30*v}px`,height:"20px",backgroundColor:"green",margin:"0 auto",textAlign:"center",border:"1px solid"}}>{v}</div>
