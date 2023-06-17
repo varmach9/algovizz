@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import YoutubeEmbed from './utils/Youtube'
 const Tarsum = () => {
     const [arr,setarr]= useState([1,2,3,4,4,5,5,7,8,10,11,12,14,15,17])
     const [target,settarget]=useState(23)
@@ -19,6 +19,7 @@ const Tarsum = () => {
       document.getElementById(j).style.backgroundColor="green"
       await sleep(500)
       while(i<j && found===0){
+        console.log(arr[i],arr[j],arr[i]+arr[j],target,arr[i]+arr[j]===target)
         if(arr[i]+arr[j]===target){
           found=1;
           break
@@ -55,7 +56,6 @@ const Tarsum = () => {
       if (arr.length<3){return}
       for(let p=0;p<=arr.length-1;p++){ document.getElementById(p).style.backgroundColor="white"  }
       setrunning(1)
-      let k=0;
       let i=1;
       let j=arr.length-1;
       let found=0;
@@ -117,9 +117,9 @@ const Tarsum = () => {
       t.forEach(element => {
         newarr.push(Number(element))
       });
-      t.sort(function(a, b){return a-b})
-      console.log(t)
-      setarr(t)
+      newarr.sort(function(a, b){return a-b})
+      console.log(newarr)
+      setarr(newarr)
       event.preventDefault();
     }
     const handleSubmit2=(event)=>{
@@ -127,6 +127,7 @@ const Tarsum = () => {
       document.getElementById("result").innerHTML=``
       for(let i=0;i<arr.length;i++){ document.getElementById(i).style.backgroundColor="white"}
       settarget(Number(str2))
+      console.log(Number(str2))
       event.preventDefault();
     }
     const randomize=()=>{
@@ -141,48 +142,59 @@ const Tarsum = () => {
       setarr(t)
     }
   return (
-    <div>
-      <div style={{display:"flex"}}>
+    <div style={{marginLeft:"50px"}}>
+        <div style={{display:"flex",justifyContent:"center",width:"1300px",margin:"10px"}}><h1 style={{fontWeight:"bolder",color:"purple", textShadow: "0 0 1px blue",paddingLeft:"235px",paddingRight:"5px"}}>Target Sum</h1></div>
+
+      <div style={{marginLeft:'100px'}}>
         <div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{margin:"10px"}} >
                   <label>
                     Array input:
-                    <input type="text" value={str} onChange={(e)=>{
+                    <input type="text" style={{marginLeft:"17px"}} value={str} onChange={(e)=>{
                         if(running){return}
                         setstr(e.target.value)}}/>
                   </label>
-                  <input type="submit" value="Submit" />
+                  <input type="submit" class="btn btn-warning btn-sm"  style={{marginLeft:"20px"}} value="Submit" />
           </form>
-          <form onSubmit={handleSubmit2}>
+          <form onSubmit={handleSubmit2} style={{margin:"10px"}}>
                   <label>
                     Target input:
-                    <input type="integer" value={str2} onChange={(e)=>{
+                    <input type="integer" style={{marginLeft:"10px"}} value={str2} onChange={(e)=>{
                         if(running){return}
                         setstr2(e.target.value)}}/>
                   </label>
-                  <input type="submit" value="Submit" />
+                  <input type="submit" class="btn btn-warning btn-sm" style={{marginLeft:"20px"}} value="Submit" />
           </form>
-          <div>
-            <button onClick={twosum}>Two-sum</button>
-          </div>
-          <div>
-            <button onClick={threesum}>Three-sum</button>
-          </div>
-          <div>
-            <button onClick={randomize}>Randomize Array</button>
+          <div style={{display:"flex"}}>
+            <button style={{marginRight:'20px',marginTop:'20px'}} class="btn btn-primary btn-sm" onClick={twosum}>Two-sum</button>
+            <button style={{marginRight:'20px',marginTop:'20px'}} class="btn btn-primary btn-sm" onClick={threesum}>Three-sum</button>
+            <button style={{marginRight:'20px',marginTop:'20px'}} class="btn btn-primary btn-sm" onClick={randomize}>Randomize Array</button>
           </div>
         </div>
       </div>
-      <div>target = {target}</div>
+      <div style={{display:"flex",marginLeft:'100px',marginTop:"20px"}}>Target = {target}</div>
       <div style={{display:"flex",justifyContent:"center"}}>
         {arr.map((val,ind)=>{
-          return <div id={ind} style={{display:"flex",width:"30px",height:"30px",justifyContent:"center",border:"solid",marginLeft:"10px",marginTop:"20px",marginBottom:"20px"}}>{val}</div>
+          return <div id={ind} style={{display:"flex",width:"50px",height:"50px",paddingTop:"10px",justifyContent:"center",border:"solid",marginLeft:"10px",marginTop:"20px",marginBottom:"20px"}}>{val}</div>
         })}
       </div>
         {/* <div>{target}</div> */}
-        <div id="result"></div>
-        <div> Two-sum Algorithm: finds if two elements in an array sum to given target  </div>
-        <div>Three-sum Algorithm: finds if three elements in an array sum to given target</div>
+        <div style={{marginLeft:"100px",marginBottom:"40px",display:"flex"}}>
+          <div style={{marginRight:"10px"}}>Result:</div>
+          <div id="result"></div>
+        </div>
+        <div style={{marginLeft:"100px"}}> Two-sum : finds if two elements in an array sum to given target  </div>
+        <div style={{marginLeft:"100px"}}>Three-sum : finds if three elements in an array sum to given target</div>
+
+        <div style={{display:"flex",marginTop:"30px",marginLeft:"50px",color:"orangered"}}><h2>Learn More </h2></div>
+    <hr style={{width:"95%",margin:"auto"}}></hr>
+    <div className='' style={{display: "flex",marginTop:"30px",marginBottom:"50px",color:"green",textAlign:"center"}}>
+        
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="UXDSeD9mN-k" title="2-Sum" />  </div>
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="BCLfxQja9dI" title="3-Sum"/></div>
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="2wVjt3yhGwg" title="2 Pointer Technique"/></div>
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}> </div>
+   </div>
     </div>
   )
 }

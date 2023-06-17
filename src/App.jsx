@@ -16,6 +16,7 @@ import Search from './components/Search';
 import Editdis from './components/Editdis';
 import TowersOfHanoi from './components/Toh';
 import Footer from './components/Footer';
+import About from './pages/About';
 
 function App() {
   
@@ -37,6 +38,7 @@ function App() {
               <Route path="/search" element={<Search/>}/>
               <Route path="/ed" element={<Editdis/>}/>
               <Route path="/toh" element={<TowersOfHanoi/>}/>
+              <Route path="/about" element={<About/>}/>
 
           </Routes>
         <Footer/>

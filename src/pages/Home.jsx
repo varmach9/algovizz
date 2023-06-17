@@ -45,9 +45,9 @@ const Home = () => {
         <div>
             <Link to="/primefinder">Prime Number Finder</Link>
             <br></br>
-            <Link to="/tar-sum">target-sum</Link>
+            <Link to="/tar-sum">2-Pointers: target-sum</Link>
             <br></br>
-            <Link to="/toh">towers of hanoi</Link>
+            <Link to="/toh">Recursion: towers of hanoi</Link>
             <br></br>
         </div>
         

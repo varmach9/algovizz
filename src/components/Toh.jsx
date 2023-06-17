@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import YoutubeEmbed from "./utils/Youtube";
 
 const TowersOfHanoi=()=>{
   const [n,setn]=useState(4)
@@ -59,12 +60,17 @@ const TowersOfHanoi=()=>{
 
 
   return <div >
-    <div>
-      <button onClick={fn}>Solve TOH</button>
+    <div >
+    <div style={{display:"flex",justifyContent:"center",width:"1300px",margin:"10px"}}><h1 style={{fontWeight:"bolder",color:"purple", textShadow: "0 0 1px blue",paddingLeft:"0px",paddingRight:"5px"}}>Towers Of Hanoi</h1></div>
+    <div style={{marginLeft:"100px"}}>
       <form onSubmit={(e)=>{setn(nsetter);e.preventDefault()}}>
-        <input type="integer" value={nsetter} onChange={(e)=>{if(running===1){return};if(e.target.value<7){setnsetter(e.target.value)}}}></input>
-        <input type="Submit" value="submit"></input>
+        <div style={{display:"flex"}}>
+        <h6 style={{marginTop:"5px", marginRight:"10px"}}>No of Disks: </h6>
+        <input  style={{width:"50px"}} type="integer" value={nsetter} onChange={(e)=>{if(running===1){return};if(e.target.value<7){setnsetter(e.target.value)}}}></input>
+        <input style={{marginLeft:"10px"}} class="btn btn-warning btn-sm" type="Submit" value="submit"></input>
+        </div>
       </form>
+      <button style={{marginTop:"20px"}} class="btn btn-primary btn-sm" onClick={fn}>Solve TOH</button>
     </div>
 
     <div style={{display:"flex",  justifyContent:"center",marginBottom:"30px"}} className="waitingArea">
@@ -79,9 +85,9 @@ const TowersOfHanoi=()=>{
     </div>
       
     </div>
+    </div>
 
-
-    <div style={{display:"flex",  justifyContent:"center"}} className="tohArea">
+    <div style={{display:"flex",  justifyContent:"center",width:"1300px"}} className="tohArea">
     <div style={{width:"200px",height:"330px",border:"1px solid",alignContent:"center"}}>
         <div className="polearea"style={{width:"200px",height:"300px",display:"flex",justifyContent:"center"}}>
           <div>
@@ -123,6 +129,18 @@ const TowersOfHanoi=()=>{
         <div className="base" style={{width:"150px",height:"30px",backgroundColor:"brown",marginLeft:"25px"}}></div>
       </div>
       
+    </div>
+
+    <div style={{marginLeft:"50px",marginTop:"20px"}}>
+    <div style={{display:"flex",marginTop:"30px",marginLeft:"50px",color:"orangered"}}><h2>Learn More </h2></div>
+    <hr style={{width:"95%",margin:"auto"}}></hr>
+    <div className='' style={{display: "flex",marginTop:"30px",marginBottom:"50px",color:"green",textAlign:"center"}}>
+        
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="rf6uf3jNjbo" title="" />  </div>
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}><YoutubeEmbed embedId="CY5gQBTQ6zA" title=""/></div>
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}></div>
+   <div className=" " style={{marginLeft:"50px",width:"300px"}}> </div>
+   </div>
     </div>
   </div>
 }
