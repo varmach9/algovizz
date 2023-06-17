@@ -5,8 +5,8 @@ const Header = () => {
   return (
     <div>
     <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{paddingLeft:"20px",width:"1520px"}}>
-      <a className="navbar-brand" href="/">
-        <img src="logo.png" alt=""  height="35px"></img>
+      <a  style={{marginLeft:'20px'}}className="navbar-brand" href="/">
+        <img src="logo.png" alt=""   height="35px"></img>
       </a>
       <div><h5>ALGOVIZ</h5></div>
       <div style={{width:"80%",textAlign:"center"}}></div>
