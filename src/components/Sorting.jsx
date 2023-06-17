@@ -339,7 +339,7 @@ SelectionSort=async()=>{
     }
 render(){ 
   return (
-        <div className='App' style={{marginLeft:"30px"}}>
+        <div className='App' style={{marginLeft:"30px",marginTop:"30px"}}>
         <div style={{display:"flex"}}>
         <div style={{width:"540px",backgroundColor:""}}>
         <div id='aboutalgo' style={{display:"flex",justifyContent:"center",paddingBottom:"10px",height:""}}>
