@@ -4,10 +4,13 @@ This website aims to address a common drawback found in many online resources fo
 
 Explore Various varieties of Algorithms in DP, Backtracking, CPU scheduling, Sorting, Searching and more.........
 
-
+Here are some snippets from website...
+<h1>CPU Scheduling</h1>
 [screen-capture.webm](https://github.com/varmach9/algovizz/assets/68813737/154ed3e8-f881-46de-8bd8-f0473f65aef0)
+<h1>CGraphs</h1>
 
 ![Screenshot 2023-06-18 101117](https://github.com/varmach9/algovizz/assets/68813737/1e764a0d-b2af-473f-aa27-678d7daebe82)
+<h1>Dynamic Programming</h1>
 
 ![s2](https://github.com/varmach9/algovizz/assets/68813737/cab65078-35af-478f-89d2-2a4747eb861c)
 
