@@ -965,15 +965,15 @@ const Cpu = () => {
             <div style={{display:"flex",justifyContent:"left",width:"600px"}}>
                 <div>
                     <div style={{width:"250px",textAlign:"center"}}>Preemptive</div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button style={{backgroundColor:(algo===1)?"red":""}} type="button" class="btn btn-primary btn-sm" onClick={rr}>Round-Robin Scheduling</button></div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button style={{backgroundColor:(algo===2)?"red":""}} type="button" class="btn btn-primary btn-sm" onClick={pb}>RR Priority (Multi ready queue)</button></div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button style={{backgroundColor:(algo===3)?"red":""}} type="button" class="btn btn-primary btn-sm" onClick={srjf}>Shotest Remaining Job First</button></div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button style={{backgroundColor:(algo===4)?"red":""}} type="button" class="btn btn-primary btn-sm" onClick={lrjf}>Longest Remaining Job First</button></div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button style={{backgroundColor:(algo===1)?"red":""}} type="button" class="btn btn-warning btn-sm" onClick={rr}>Round-Robin Scheduling</button></div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button style={{backgroundColor:(algo===2)?"red":""}} type="button" class="btn btn-warning btn-sm" onClick={pb}>RR Priority (Multi ready queue)</button></div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button style={{backgroundColor:(algo===3)?"red":""}} type="button" class="btn btn-warning btn-sm" onClick={srjf}>Shotest Remaining Job First</button></div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button style={{backgroundColor:(algo===4)?"red":""}} type="button" class="btn btn-warning btn-sm" onClick={lrjf}>Longest Remaining Job First</button></div>
                 </div>
                 <div>  
                     <div style={{width:"200px",textAlign:"center"}}>Preemptive(mixed)</div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button style={{backgroundColor:(algo===5)?"red":""}} type="button" class="btn btn-primary btn-sm" onClick={rrsjf}>RR-SJF</button></div>
-                    <div style={{textAlign:"center",marginTop:"10px"}} ><button style={{backgroundColor:(algo===6)?"red":""}} type="button" class="btn btn-primary btn-sm" onClick={rrljf}>RR-LJF</button></div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button style={{backgroundColor:(algo===5)?"red":""}} type="button" class="btn btn-success btn-sm" onClick={rrsjf}>RR-SJF</button></div>
+                    <div style={{textAlign:"center",marginTop:"10px"}} ><button style={{backgroundColor:(algo===6)?"red":""}} type="button" class="btn btn-success btn-sm" onClick={rrljf}>RR-LJF</button></div>
                 </div>
                 <div>
                     <div style={{width:"200px",textAlign:"center"}}>Non-Preemptive</div>
@@ -1046,8 +1046,8 @@ const Cpu = () => {
     <div style={{marginLeft:"100px",display:"flex",marginRight:"100px"}} id="processState"> State : {!running?"Process not running":"Process Running"} </div>
             <form onSubmit={(event)=>{event.preventDefault()}}>
                   <label>
-                    Quantum:
-                    <input type="integer"  value={quantum} onChange={(e)=>{setquantum(Number(e.target.value))}} style={{width:"40px"}}/>
+                    Time Quantum:
+                    <input type="integer"   value={quantum} onChange={(e)=>{setquantum(Number(e.target.value))}} style={{width:"40px",marginLeft:"10px"}}/>
                   </label>
                 </form>
         <div style={{marginTop:"5px",marginBottom:"10px",marginLeft:"50px"}}>Adjust Speed:</div>
