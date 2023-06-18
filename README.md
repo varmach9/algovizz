@@ -6,7 +6,7 @@ This website aims to address a common drawback found in many online resources fo
 Here are some snippets from website...
 
 <h1>CPU Scheduling</h1>
-![Screenshot 2023-06-18 101117](https://github.com/varmach9/algovizz/assets/68813737/ff59b505-4de1-4265-b11e-b766effafcf0)
+<img src="https://github.com/varmach9/algovizz/assets/68813737/ff59b505-4de1-4265-b11e-b766effafcf0" alt=""/>
 
 
 <h1>Graphs</h1>
