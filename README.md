@@ -6,15 +6,14 @@ This website aims to address a common drawback found in many online resources fo
 Here are some snippets from website...
 
 <h1>CPU Scheduling</h1>
-![s3](https://github.com/varmach9/algovizz/assets/68813737/ef78a4a3-c2fb-4d3c-be4f-b0b4073b7e71)![Uploading s3.png…]()
-![s2](https://github.com/varmach9/algovizz/assets/68813737/3d70d016-10bc-47c8-9909-9a14a6a5b851)
+![Screenshot 2023-06-18 101117](https://github.com/varmach9/algovizz/assets/68813737/ff59b505-4de1-4265-b11e-b766effafcf0)
 
 
 <h1>Graphs</h1>
-![Screenshot 2023-06-18 101117](https://github.com/varmach9/algovizz/assets/68813737/1e764a0d-b2af-473f-aa27-678d7daebe82)
+
 
 <h1>Dynamic Programming</h1>
-![s2](https://github.com/varmach9/algovizz/assets/68813737/cab65078-35af-478f-89d2-2a4747eb861c)
+
 
 
 
