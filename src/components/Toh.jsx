@@ -73,7 +73,7 @@ const TowersOfHanoi=()=>{
       <button style={{marginTop:"20px"}} class="btn btn-primary btn-sm" onClick={fn}>Solve TOH</button>
     </div>
 
-    <div style={{display:"flex",  justifyContent:"center",marginBottom:"30px"}} className="waitingArea">
+    <div style={{display:"flex",  justifyContent:"center",marginBottom:"30px",width:"1300px"}} className="waitingArea">
     <div style={{width:"202px",height:"20px",alignContent:"center"}}>
         <div style={{width:`${dwt1*30}px`,height:"20px",backgroundColor:"green",margin:"0 auto",textAlign:"center",border:(dwt1===0)?"":"1px solid"}}>{(dwt1!==0)?dwt1:""}</div>
     </div>
