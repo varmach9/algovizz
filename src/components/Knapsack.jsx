@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import YoutubeEmbed from './utils/Youtube'
 
 const Knp = () => {
@@ -11,7 +11,10 @@ const Knp = () => {
     const [f,setf]=useState(5)
     const [run,setrun]=useState(0)
     const [speed,setspeed]=useState(1000)
-
+    useEffect(()=>{window.scroll({
+        top: 0, 
+        behavior:"instant"
+      });},[])
     const knap01=async()=>{
         if(run===1){return}
         document.getElementById("answer").innerHTML=""

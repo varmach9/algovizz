@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import YoutubeEmbed from './utils/Youtube'
 
 const Nqueen = () => {
@@ -6,6 +6,10 @@ const Nqueen = () => {
     const [d,setd]=useState(6)
     const [r,setr]=useState(0)
     const [speed,setspeed]=useState(1000)
+    useEffect(()=>{window.scroll({
+        top: 0, 
+        behavior:"instant"
+      });},[])
     let answer=[]
     const solveNQUtil=(board, col,N,ld,rd,cl)=>{
         console.log(col)

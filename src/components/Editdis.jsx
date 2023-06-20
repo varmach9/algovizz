@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import YoutubeEmbed from './utils/Youtube'
 
 const Editdis = () => {
@@ -9,6 +9,10 @@ const Editdis = () => {
     const [d,setd]=useState("crash")
     const [speed,setspeed]=useState(1000)
     const [run,setrun]=useState(0)
+    useEffect(()=>{window.scroll({
+      top: 0, 
+      behavior:"instant"
+    });},[])
 
     const lcs=async()=>{
         if(run===1){return}

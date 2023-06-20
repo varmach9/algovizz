@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import YoutubeEmbed from './utils/Youtube'
 const Tarsum = () => {
     const [arr,setarr]= useState([1,2,3,4,4,5,5,7,8,10,11,12,14,15,17])
@@ -6,6 +6,10 @@ const Tarsum = () => {
     const [running,setrunning]=useState(0)
     const [str,setstr]=useState("")
     const [str2,setstr2]=useState("")
+    useEffect(()=>{window.scroll({
+      top: 0, 
+      behavior:"instant"
+    });},[])
     const twosum=async()=>{
       document.getElementById("result").innerHTML=""
       if (arr.length<2){return}

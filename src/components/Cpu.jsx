@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import "./styles.css"
 import YoutubeEmbed from './utils/Youtube'
 
@@ -16,6 +16,10 @@ const Cpu = () => {
         [9, 9,	16, 3, 0, 0, 0, 0],
         [10,7,  18, 1 ,0, 0, 0, 0]
     ])
+    useEffect(()=>{window.scroll({
+        top: 0, 
+        behavior:"instant"
+      });},[])
     const [a,seta]=useState(11)
     const [b,setb]=useState(1)
     const [c,setc]=useState(1)

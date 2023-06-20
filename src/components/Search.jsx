@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import YoutubeEmbed from './utils/Youtube'
 
 
@@ -8,7 +8,10 @@ const Search = () => {
     const [running,setrunning]=useState(0)
     const [str,setstr]=useState("")
     const [str2,setstr2]=useState("")
-
+    useEffect(()=>{window.scroll({
+      top: 0, 
+      behavior:"instant"
+    });},[])
     const ls=async()=>{
         if (running){return}
         

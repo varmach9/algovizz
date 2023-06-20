@@ -11,6 +11,10 @@ function Canvas(){
   useEffect(() => {
     console.log(nodes,arr)
   }, [nodes,arr]);
+  useEffect(()=>{window.scroll({
+    top: 0, 
+    behavior:"instant"
+  });},[])
   // for edge setting form
   const [a,seta]=useState(1)
   const [b,setb]=useState(2)

@@ -1,9 +1,13 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import YoutubeEmbed from './utils/Youtube'
 
 const Primenumber = () => {
     const[n,setn]=useState(50)
+    useEffect(()=>{window.scroll({
+        top: 0, 
+        behavior:"instant"
+      });},[])
     const findp=async()=>{
         for(let i=1;i<=n;i++){document.getElementById(i).style.backgroundColor="red"}
         let k=Math.floor(Math.sqrt(n))

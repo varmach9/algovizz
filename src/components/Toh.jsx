@@ -7,6 +7,10 @@ const TowersOfHanoi=()=>{
   const [dt1,setdt1]=useState([1,2,3,4])
   const [dt2,setdt2]=useState([])
   const [dt3,setdt3]=useState([])
+  useEffect(()=>{window.scroll({
+    top: 0, 
+    behavior:"instant"
+  });},[])
   let t2=[]
   let t3=[]
   let ans=[]

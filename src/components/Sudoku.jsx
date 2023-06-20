@@ -1,9 +1,13 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import YoutubeEmbed from './utils/Youtube'
 const Sudoku = () => {
     const [ru,setru]=useState(0)
     const [completed,setcompleted]=useState(0)
     const [speed,setspeed]=useState(200)
+    useEffect(()=>{window.scroll({
+        top: 0, 
+        behavior:"instant"
+      });},[])
     const row=[]
     const col=[]
     const box=[]

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import YoutubeEmbed from './utils/Youtube'
 
 const Paths = () => {
@@ -7,6 +7,10 @@ const Paths = () => {
   const[start,setstart]=useState(-1)
   const[end,setend]=useState(-1)
   const[speed,setspeed]=useState(100)
+  useEffect(()=>{window.scroll({
+    top: 0, 
+    behavior:"instant"
+  });},[])
   const setwall=()=>{
     for(let i=0;i<40;i++){
       let k=Math.floor(Math.random()*20);
