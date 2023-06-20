@@ -1,71 +1,20 @@
-# Getting Started with Create React App
+Visualizing algorithms can be challenging when learning them. This Website is created to help others grasp algorithmic concepts more easily through by animating their working. Within this website, you'll find a collection of valuable video links and practice problems that aim to enhance your understanding.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This website aims to address a common drawback found in many online resources for visualizing algorithms: the lack of customization options for input. While there are numerous online platforms available for visualizing algorithms, they often provide predefined examples or limited input options, which can restrict learners' ability to experiment and truly understand the algorithms. In contrast, this website offers a unique solution by providing customizable input options. It allows learners to input their own data sets or parameters, enabling them to explore the behavior of algorithms with a wide range of inputs. By having the freedom to customize the input, learners can observe how algorithms handle different scenarios and gain a deeper understanding of their strengths, weaknesses, and overall performance.
 
-## Available Scripts
 
-In the project directory, you can run:
+Here are some snippets from website...
 
-### `npm start`
+<h1>CPU Scheduling</h1>
+<img src="https://github.com/varmach9/algovizz/assets/68813737/47999566-752d-4e76-83b5-a39f09e17370" alt=""/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<h1>Graphs</h1>
+<img src="https://github.com/varmach9/algovizz/assets/68813737/ff59b505-4de1-4265-b11e-b766effafcf0" alt=""/>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<h1>Dynamic Programming</h1>
+<img src="https://github.com/varmach9/algovizz/assets/68813737/cc911d98-bc91-4648-b1fb-df87cfcc7f94" alt=""/>
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Explore Various varieties of Algorithms in DP, Backtracking, CPU scheduling, Sorting, Searching and more.........
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# algovizz
+Video Resources are collected from various youtube channels and practice problems from GeeksForGeeks
